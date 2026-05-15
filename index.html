@@ -44,7 +44,7 @@
 
         window.gtag("js", new Date());
         window.gtag("config", this.measurementId, {
-          send_page_view: false,
+          /* send_page_view: false, */
           anonymize_ip: true
         });
 
@@ -927,7 +927,7 @@
 		    	playsinline
 		    	poster="images/vsl-thumbnail.jpg"
 		    >
-		    	<source src="videos/dps.mp4" type="video/mp4"/>
+		    	<source src="https://media.huwamai.com/videos/dps-web.mp4" type="video/mp4"/>
 		    	Your browser does not support the video tag.
 		    </video>
 		  </div>          
@@ -1662,7 +1662,7 @@ Cal.ns["15min"]("ui", {
       if (CONSENT) CONSENT.acceptAnalytics();
       hideCookieBanner();
       trackEvent("cookie_consent_updated", { analytics_choice: "accepted" });
-      sendPageViewOnce();
+      /* sendPageViewOnce(); */
     });
   }
 
@@ -1683,7 +1683,7 @@ Cal.ns["15min"]("ui", {
   showCookieBanner(false);
 
   if (window.__analyticsEnabled) {
-    sendPageViewOnce();
+    /* sendPageViewOnce(); */
   }
 
   window.addEventListener("pagehide", function () {
