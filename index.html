@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demand Protection for Private Dental Practices</title>
+  <meta name="description" content="Protect high-value implant and Invisalign enquiries from booking elsewhere when reception is busy or the practice is closed." />
+
+  <style>
+    :root{
+      /* Base palette (clean, dental-safe) */
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #0B1220;
+      --muted: #46536B;
+      --line: rgba(11, 18, 32, 0.10);
+
+      --primary: #1F6FEB; /* brand blue for accents */
+      --primary-ink: #0D2A66;
+
+      /* Amazon-style CTA */
+      --cta-bg: #FFD814;
+      --cta-border: #FCD200;
+      --cta-hover: #F7CA00;
+      --cta-text: #111111;
+
+      --shadow: 0 10px 30px rgba(11,18,32,0.08);
+      --radius: 18px;
+
+      --container: 1120px;
+
+      --h1: clamp(1.6rem, 3.2vw, 2.6rem);
+      --h2: clamp(1.2rem, 2.2vw, 1.6rem);
+      --h3: clamp(1.05rem, 1.6vw, 1.2rem);
+      --p:  clamp(0.98rem, 1.2vw, 1.05rem);
+
+      --space-1: clamp(8px, 1.2vw, 14px);
+      --space-2: clamp(12px, 1.6vw, 18px);
+      --space-3: clamp(16px, 2.2vw, 26px);
+      --space-4: clamp(22px, 3vw, 40px);
+      --space-5: clamp(28px, 3.8vw, 54px);
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    a{ color: inherit; }
+
+    .container{
+      width: min(var(--container), calc(100% - 2*var(--space-3)));
+      margin: 0 auto;
+    }
+
+    /* Top nav */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,249,252,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      gap: var(--space-2);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 180px;
+    }
+    .logo{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(31,111,235,0.15), rgba(31,111,235,0.05));
+      border: 1px solid rgba(31,111,235,0.25);
+      display:grid;
+      place-items:center;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .brand-name{
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-sub{
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* CTA button */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--cta-border);
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+      transition: transform 120ms ease, background 120ms ease;
+      white-space: nowrap;
+    }
+    .btn:hover{ background: var(--cta-hover); transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); }
+
+    .btn.secondary{
+      background: transparent;
+      border: 1px solid rgba(31,111,235,0.28);
+      color: var(--primary-ink);
+      box-shadow: none;
+    }
+    .btn.secondary:hover{
+      background: rgba(31,111,235,0.06);
+      border-color: rgba(31,111,235,0.35);
+      transform: none;
+    }
+
+    /* HERO (Above the fold) */
+    .hero{
+      /* Use mobile-safe viewport unit so "above-the-fold" is actually above fold on phones */
+      min-height: 100svh;
+      display:flex;
+      align-items: stretch;
+      padding: var(--space-4) 0 var(--space-3);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--space-4);
+      align-items: stretch;
+    }
+
+    .hero-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--primary-ink);
+      background: rgba(31,111,235,0.08);
+      border: 1px solid rgba(31,111,235,0.18);
+      padding: 8px 12px;
+      border-radius: 999px;
+      width: fit-content;
+      margin-bottom: var(--space-2);
+    }
+
+    h1{
+      font-size: var(--h1);
+      line-height: 1.08;
+      margin: 0 0 var(--space-2);
+      letter-spacing: -0.03em;
+    }
+    .subhead{
+      font-size: clamp(1.02rem, 1.35vw, 1.15rem);
+      color: var(--muted);
+      margin: 0 0 var(--space-2);
+      max-width: 60ch;
+    }
+    .support{
+      font-size: var(--p);
+      color: var(--text);
+      margin: 0 0 var(--space-3);
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      margin-top: auto;
+    }
+
+    .microproof{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* VSL placeholder */
+    .vsl{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-3);
+      display:flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      min-height: 0;
+    }
+    .vsl-title{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .vsl-box{
+      border-radius: 14px;
+      border: 1px dashed rgba(11,18,32,0.22);
+      background: linear-gradient(180deg, rgba(11,18,32,0.03), rgba(11,18,32,0.01));
+      display:grid;
+      place-items:center;
+      /* Critical: keep within fold on all devices */
+      height: clamp(180px, 28svh, 340px);
+      min-height: 160px;
+      max-height: 360px;
+      padding: 18px;
+      text-align:center;
+    }
+    .play{
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: rgba(31,111,235,0.10);
+      border: 1px solid rgba(31,111,235,0.25);
+      margin-bottom: 10px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .vsl-caption{
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Logo strip */
+    .logo-strip{
+      padding: var(--space-3) 0 var(--space-4);
+    }
+    .logo-strip-inner{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content: center;
+    }
+    .logo-pill{
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Sections */
+    section{
+      padding: var(--space-5) 0;
+    }
+
+    .section-head{
+      margin-bottom: var(--space-3);
+      text-align: center;
+    }
+    .section-head h2{
+      margin: 0 0 10px;
+      font-size: var(--h2);
+      letter-spacing: -0.02em;
+    }
+    .section-head p{
+      margin: 0 auto;
+      max-width: 80ch;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--space-3);
+      box-shadow: var(--shadow);
+      min-height: 0;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: var(--h3);
+      letter-spacing: -0.02em;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+
+    /* Transformation step cards */
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      color: var(--primary-ink);
+    }
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+    .bullets{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+    .bullets li{ margin: 6px 0; }
+
+    /* Contrast section */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      align-items: stretch;
+    }
+    .contrast-box{
+      border-radius: var(--radius);
+      padding: var(--space-3);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.75);
+      min-height: 0;
+    }
+    .contrast-box h3{
+      margin: 0 0 10px;
+      font-size: var(--h3);
+    }
+    .contrast-flow{
+      color: var(--muted);
+      font-size: var(--p);
+      line-height: 1.6;
+    }
+    .arrow{
+      display:inline-block;
+      padding: 0 6px;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    /* Calendar blocks */
+    .cta-band{
+      text-align:center;
+      padding: var(--space-4) 0;
+    }
+    .short-offer{
+      margin: 10px auto 0;
+      max-width: 86ch;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+
+    .calendar{
+      margin-top: var(--space-3);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      height: clamp(360px, 52vh, 560px);
+      display:grid;
+      place-items:center;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Testimonials */
+    .testimonials{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+    .quote{
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .avatar{
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: rgba(11,18,32,0.05);
+      border: 1px solid var(--line);
+    }
+    .stars{
+      color: #C18F00;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+    .quote p{
+      margin: 0;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+    .quote strong{
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--line);
+      padding: var(--space-4) 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-inner{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .footer-links{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .split{ grid-template-columns: 1fr; }
+      .testimonials{ grid-template-columns: 1fr; }
+      .topbar-inner{ gap: 10px; }
+      .brand-sub{ display:none; }
+    }
+
+    @media (max-width: 420px){
+      .btn{ width: 100%; }
+      .hero-actions{ width: 100%; }
+    }
+
+    /* Accessibility */
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand" aria-label="Brand">
+          <div class="logo">H</div>
+          <div>
+            <div class="brand-name">HuwamAi</div>
+            <div class="brand-sub">Demand Protection for Private Dental Practices</div>
+          </div>
+        </div>
+
+        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO / ABOVE THE FOLD -->
+  <header class="hero" role="banner">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div class="hero-card">
+          <div>
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              For UK private dental practices generating implant, aligner & cosmetic enquiries
+            </div>
+
+            <h1>Most implant and Invisalign enquiries book with whoever answers first.</h1>
+
+            <p class="subhead">
+              Protect high-value treatment enquiries from booking with another practice when your reception is busy or the practice is closed.
+            </p>
+
+            <p class="support">
+              Private practices invest heavily to generate high-value enquiries.
+              But too often, the final outcome depends on one fragile variable: <strong>whether someone answers the phone.</strong>
+            </p>
+          </div>
+
+          <div>
+            <div class="hero-actions">
+              <a class="btn" href="#book">Schedule Your Discovery Call</a>
+              <a class="btn secondary" href="#how">See how it works</a>
+            </div>
+
+            <div class="microproof">
+              Visual cue: <strong>7:42pm</strong> <span class="arrow">→</span> Patient calls <span class="arrow">→</span> Voicemail <span class="arrow">→</span> Calls next practice <span class="arrow">→</span> Consultation booked
+            </div>
+          </div>
+        </div>
+
+        <aside class="vsl" aria-label="Video Sales Letter placeholder">
+          <div class="vsl-title">Video overview (placeholder)</div>
+          <div class="vsl-box" role="img" aria-label="Video placeholder">
+            <div>
+              <div class="play" aria-hidden="true">▶</div>
+              <div style="font-weight:800; letter-spacing:-0.02em;">Demand Protection in 90 seconds</div>
+              <p class="vsl-caption">Replace this placeholder with your VSL later.</p>
+            </div>
+          </div>
+          <p class="vsl-caption" style="margin:0;">
+            No AI jargon. Just the reality of how high-value treatment enquiries behave — and how to protect them.
+          </p>
+        </aside>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- COMPANY LOGOS STRIP (credibility placeholders) -->
+  <div class="logo-strip" aria-label="Credibility logo strip">
+    <div class="container">
+      <div class="logo-strip-inner">
+        <div class="logo-pill">Company / Association Logo</div>
+        <div class="logo-pill">Company / Association Logo</div>
+        <div class="logo-pill">Company / Association Logo</div>
+        <div class="logo-pill">Company / Association Logo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE TRANSFORMATION (3-step delivery system) -->
+  <section id="how" aria-label="The Transformation">
+    <div class="container">
+      <div class="section-head">
+        <h2>The Transformation</h2>
+        <p>From availability-dependent enquiries → protected demand, using a simple 3-step activation process.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 1 — Overflow & Out-of-Hours Activation</div>
+          <p>
+            A Demand Protection Layer is configured around your phone handling and booking structure, then activates automatically when reception cannot answer.
+          </p>
+          <ul class="bullets">
+            <li>Line busy</li>
+            <li>No answer after a set number of rings</li>
+            <li>Outside opening hours</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 2 — Treatment Intent Capture + Booking</div>
+          <p>
+            When it activates, the enquiry is handled immediately so the caller can be booked into an appropriate consultation slot rather than waiting.
+          </p>
+          <ul class="bullets">
+            <li>Asks what the caller is enquiring about</li>
+            <li>Captures details</li>
+            <li>Offers available consultation slots (based on your structure)</li>
+            <li>Confirms booking + notifies the practice</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 3 — Demand Visibility</div>
+          <p>
+            You receive visibility into treatment demand that previously disappeared during busy periods and after hours.
+          </p>
+          <ul class="bullets">
+            <li>Enquiries captured outside opening hours</li>
+            <li>Enquiries captured during busy periods</li>
+            <li>Consultations booked through the system</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE BENEFITS -->
+  <section aria-label="The Benefits">
+    <div class="container">
+      <div class="section-head">
+        <h2>The Benefits</h2>
+        <p>Clear, practical outcomes — without inflated claims.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>After-hours enquiries are still handled</h3>
+          <p>High-value callers aren’t forced into voicemail, even in the evenings and weekends.</p>
+        </div>
+        <div class="card">
+          <h3>Busy-period gaps stop causing silent losses</h3>
+          <p>When reception is overloaded, enquiries are still captured rather than drifting to the next practice.</p>
+        </div>
+        <div class="card">
+          <h3>Consultations can be booked immediately</h3>
+          <p>Instead of relying on the caller to submit a form, wait, or ring back later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CONTRAST -->
+  <section aria-label="The Contrast">
+    <div class="container">
+      <div class="section-head">
+        <h2>The Contrast</h2>
+        <p>Not about being “better” — about being available when high-value callers take action.</p>
+      </div>
+
+      <div class="split">
+        <div class="contrast-box">
+          <h3>Without Demand Protection</h3>
+          <div class="contrast-flow">
+            Patient searches <span class="arrow">→</span> calls your practice
+            <span class="arrow">→</span> voicemail / no answer
+            <span class="arrow">→</span> calls the next practice
+            <span class="arrow">→</span> consultation booked elsewhere
+          </div>
+        </div>
+
+        <div class="contrast-box">
+          <h3>With Demand Protection</h3>
+          <div class="contrast-flow">
+            Patient searches <span class="arrow">→</span> calls your practice
+            <span class="arrow">→</span> enquiry handled
+            <span class="arrow">→</span> consultation offered
+            <span class="arrow">→</span> consultation booked
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+        <p class="short-offer">
+          High-value treatment enquiries often contact multiple practices at once.
+          Demand Protection ensures you don’t lose enquiries simply because the call happened outside reception availability.
+        </p>
+      </div>
+
+      <div class="calendar" id="book" aria-label="Calendar placeholder">
+        CALENDAR (Embed your booking widget here)
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (placeholders until you have dental-specific proof) -->
+  <section aria-label="Testimonials">
+    <div class="container">
+      <div class="section-head">
+        <h2>What practice owners say (placeholder)</h2>
+        <p>
+          Until you have dental-specific testimonials, keep this honest.
+          Use structural credibility and replace these blocks once real feedback exists.
+        </p>
+      </div>
+
+      <div class="testimonials">
+        <div class="card quote">
+          <div class="avatar" aria-hidden="true"></div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p>“Placeholder testimonial. Replace with a specific, outcome-focused quote once available.”</p>
+          <strong>Full Name — Role, Practice</strong>
+        </div>
+
+        <div class="card quote">
+          <div class="avatar" aria-hidden="true"></div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p>“Placeholder testimonial. Specificity beats hype: mention the moment it solved.”</p>
+          <strong>Full Name — Role, Practice</strong>
+        </div>
+
+        <div class="card quote">
+          <div class="avatar" aria-hidden="true"></div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <p>“Placeholder testimonial. Add numbers only when you can back them up.”</p>
+          <strong>Full Name — Role, Practice</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA + CALENDAR -->
+  <section aria-label="Final Call To Action">
+    <div class="container">
+      <div class="section-head">
+        <h2>Schedule Your Discovery Call</h2>
+        <p>
+          We’ll confirm fit, map where demand is currently vulnerable (busy periods / after hours),
+          and outline the activation steps for your practice.
+        </p>
+      </div>
+
+      <div class="cta-band">
+        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+        <p class="short-offer">
+          Worst case: you leave with a clear view of how demand protection would work in your practice.
+        </p>
+      </div>
+
+      <div class="calendar" aria-label="Second calendar placeholder">
+        CALENDAR (Second embed / repeated CTA)
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="logo" style="width:34px;height:34px;border-radius:12px;">H</div>
+          <div>© <span id="year"></span> HuwamAi</div>
+        </div>
+
+        <div class="footer-links">
+          <a href="#" aria-label="Privacy">Privacy</a>
+          <a href="#" aria-label="Terms">Terms</a>
+          <a href="#" aria-label="Contact">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Tiny script only to set year; remove if you want zero JS.
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+
+</body>
+</html>
