@@ -6,16 +6,80 @@
   <title>Demand Protection for Private Dental Practices</title>
   <meta name="description" content="Protect high-value implant and Invisalign enquiries from booking elsewhere when reception is busy or the practice is closed." />
 
-  <style>
+<!--
+  Cookie consent approach for UK visitors:
+  - Analytics is OPTIONAL and is OFF by default.
+  - Google Analytics 4 loads only after the visitor explicitly accepts analytics cookies.
+  - The consent choice is stored locally so the banner does not reappear on every page load.
+  - This storage is used only to remember the visitor's privacy choice.
+  Replace G-XXXXXXXXXX with your real GA4 Measurement ID before publishing.
+-->
+<script>
+  (function () {
+    const CONSENT_STORAGE_KEY = "huwamai_cookie_consent_v1";
+    const GA_MEASUREMENT_ID = "G-900BPMY9KK";
+
+    window.HuwamAiConsent = {
+      storageKey: CONSENT_STORAGE_KEY,
+      measurementId: GA_MEASUREMENT_ID,
+      analyticsEnabled: false,
+      gaLoaded: false,
+      getState: function () {
+        try { return localStorage.getItem(CONSENT_STORAGE_KEY); }
+        catch (e) { return null; }
+      },
+      setState: function (state) {
+        try { localStorage.setItem(CONSENT_STORAGE_KEY, state); }
+        catch (e) {}
+      },
+      loadGA: function () {
+        if (this.gaLoaded || !this.measurementId || this.measurementId === "G-XXXXXXXXXX") return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ dataLayer.push(arguments); };
+
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(this.measurementId);
+        document.head.appendChild(script);
+
+        window.gtag("js", new Date());
+        window.gtag("config", this.measurementId, {
+          send_page_view: false,
+          anonymize_ip: true
+        });
+
+        this.gaLoaded = true;
+        this.analyticsEnabled = true;
+        window.__analyticsEnabled = true;
+      },
+      acceptAnalytics: function () {
+        this.setState("accepted");
+        this.loadGA();
+      },
+      rejectAnalytics: function () {
+        this.setState("rejected");
+        this.analyticsEnabled = false;
+        window.__analyticsEnabled = false;
+      }
+    };
+
+    window.__analyticsEnabled = false;
+
+    if (window.HuwamAiConsent.getState() === "accepted") {
+      window.HuwamAiConsent.loadGA();
+    }
+  })();
+</script>
+
+<style>
     :root{
-      /* Base palette (clean, dental-safe) */
       --bg: #F7F9FC;
       --surface: #FFFFFF;
       --text: #0B1220;
       --muted: #46536B;
       --line: rgba(11, 18, 32, 0.10);
 
-      --primary: #1F6FEB; /* brand blue for accents */
+      --primary: #1F6FEB;
       --primary-ink: #0D2A66;
 
       /* Amazon-style CTA */
@@ -29,7 +93,7 @@
 
       --container: 1120px;
 
-      --h1: clamp(1.6rem, 3.2vw, 2.6rem);
+      --h1: clamp(1.55rem, 3.2vw, 2.5rem);
       --h2: clamp(1.2rem, 2.2vw, 1.6rem);
       --h3: clamp(1.05rem, 1.6vw, 1.2rem);
       --p:  clamp(0.98rem, 1.2vw, 1.05rem);
@@ -71,82 +135,103 @@
       display:flex;
       align-items:center;
       justify-content: space-between;
-      padding: var(--space-2) 0;
-      gap: var(--space-2);
+      padding: 10px 0;
+      gap: 12px;
+	  min-width: 0;
     }
+	
     .brand{
       display:flex;
       align-items:center;
-      gap: 12px;
-      min-width: 180px;
+      gap: 10px;
+	  min-width: 0;
+      flex: 1 1 auto;
+      text-decoration: none;
     }
-    .logo{
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(31,111,235,0.15), rgba(31,111,235,0.05));
-      border: 1px solid rgba(31,111,235,0.25);
-      display:grid;
-      place-items:center;
-      font-weight: 700;
-      color: var(--primary);
+    .brand-logo{
+      display:block;
+      height: clamp(24px, 8vw, 36px);
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+	  flex-shrink: 1;
+	  min-width: 0;
     }
-    .brand-name{
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .brand-text{
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+	  min-width: 0;
     }
     .brand-sub{
       font-size: 0.88rem;
       color: var(--muted);
-      margin-top: 2px;
+      margin: 0;
+      line-height: 1.2;
+	  white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
-    /* CTA button */
+	
+	.logo,
+	.brand-name,
+	.brand-sub {
+	  display: none;
+	}
+	
+	/* CTA button */
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--cta-border);
-      background: var(--cta-bg);
-      color: var(--cta-text);
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
-      transition: transform 120ms ease, background 120ms ease;
-      white-space: nowrap;
+      gap: 8px;
+	  padding: 12px 16px;
+	  border-radius: 999px;
+	  border: 1px solid var(--cta-border);
+	  background: var(--cta-bg);
+	  color: var(--cta-text);
+	  font-weight: 800;
+	  font-size: 0.98rem;
+	  line-height: 1.1;
+	  text-decoration: none;
+	  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+	  transition: transform 120ms ease, background 120ms ease;
+	  white-space: nowrap;
+	  flex-shrink: 0;
     }
     .btn:hover{ background: var(--cta-hover); transform: translateY(-1px); }
-    .btn:active{ transform: translateY(0px); }
-
+	.btn:active{ transform: translateY(0px); }
+	
     .btn.secondary{
       background: transparent;
       border: 1px solid rgba(31,111,235,0.28);
       color: var(--primary-ink);
       box-shadow: none;
+      font-weight: 800;
     }
     .btn.secondary:hover{
       background: rgba(31,111,235,0.06);
       border-color: rgba(31,111,235,0.35);
       transform: none;
     }
+	
+	.btn-text-mobile{
+	  display: none;
+	}
 
     /* HERO (Above the fold) */
     .hero{
-      /* Use mobile-safe viewport unit so "above-the-fold" is actually above fold on phones */
-      min-height: 100svh;
+      min-height: auto;
       display:flex;
       align-items: stretch;
-      padding: var(--space-4) 0 var(--space-3);
+      padding: var(--space-3) 0 var(--space-2);
     }
 
     .hero-grid{
       display:grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: var(--space-4);
-      align-items: stretch;
+      align-items: start;
     }
 
     .hero-card{
@@ -185,13 +270,13 @@
       font-size: clamp(1.02rem, 1.35vw, 1.15rem);
       color: var(--muted);
       margin: 0 0 var(--space-2);
-      max-width: 60ch;
+      max-width: 62ch;
     }
     .support{
       font-size: var(--p);
       color: var(--text);
       margin: 0 0 var(--space-3);
-      max-width: 62ch;
+      max-width: 64ch;
     }
 
     .hero-actions{
@@ -221,39 +306,119 @@
       min-height: 0;
     }
     .vsl-title{
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -0.02em;
     }
-    .vsl-box{
-      border-radius: 14px;
-      border: 1px dashed rgba(11,18,32,0.22);
-      background: linear-gradient(180deg, rgba(11,18,32,0.03), rgba(11,18,32,0.01));
-      display:grid;
-      place-items:center;
-      /* Critical: keep within fold on all devices */
-      height: clamp(180px, 28svh, 340px);
-      min-height: 160px;
-      max-height: 360px;
-      padding: 18px;
-      text-align:center;
-    }
-    .play{
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
-      display:grid;
-      place-items:center;
-      background: rgba(31,111,235,0.10);
-      border: 1px solid rgba(31,111,235,0.25);
-      margin-bottom: 10px;
-      font-weight: 900;
-      color: var(--primary);
-    }
+	
+	.vsl-video{
+	  border-radius: 14px;
+	  overflow: hidden;
+	  border: 1px solid var(--line);
+	  box-shadow: var(--shadow);
+	  background: #000;
+	}
+	
+	.vsl-video-shell{
+	  position: relative;
+	  border-radius: 14px;
+	  overflow: hidden;
+	  border: 1px solid var(--line);
+	  background: #000;
+	  box-shadow: var(--shadow);
+	}
+	
+	.vsl-video video{
+	  width: 100%;
+	  height: auto;
+	  display: block;
+	  max-height: 360px;
+	  object-fit: cover;
+	}
+	
     .vsl-caption{
       color: var(--muted);
       font-size: 0.95rem;
       margin: 0;
     }
+
+	.vsl-video{
+	  width: 100%;
+	  height: auto;
+	  display: block;
+	  max-height: 360px;
+	  object-fit: cover;
+	}
+	
+	.vsl-overlay{
+	  position: absolute;
+	  inset: 0;
+	  border: 0;
+	  padding: 0;
+	  margin: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: none;
+	  cursor: pointer;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  z-index: 2;
+	}
+	
+	.vsl-thumbnail{
+	  position: absolute;
+	  inset: 0;
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	  display: block;
+	}
+	
+	.vsl-overlay::after{
+	  content: "";
+	  position: absolute;
+	  inset: 0;
+	  background: linear-gradient(
+	  	180deg,
+	  	rgba(11,18,32,0.10),
+	  	rgba(11,18,32,0.35)
+	  );
+	}
+	
+	.vsl-overlay-inner{
+	  position: relative;
+	  z-index: 1;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  gap: 10px;
+	  color: #fff;
+	  text-align: center;
+	  padding: 20px;
+	}
+	
+	.vsl-play-icon{
+	  width: 64px;
+	  height: 64px;
+	  border-radius: 999px;
+	  display: grid;
+	  place-items: center;
+	  background: rgba(255,255,255,0.14);
+	  border: 1px solid rgba(255,255,255,0.28);
+	  backdrop-filter: blur(6px);
+	  font-size: 1.25rem;
+	  padding-left: 3px;
+	}
+	
+	.vsl-overlay-text{
+	  font-weight: 800;
+	  letter-spacing: -0.02em;
+	  font-size: 0.98rem;
+	}
+	
+	.vsl-video-shell.is-playing .vsl-overlay{
+	  display: none;
+	}
 
     /* Logo strip */
     .logo-strip{
@@ -275,10 +440,7 @@
       font-size: 0.92rem;
     }
 
-    /* Sections */
-    section{
-      padding: var(--space-5) 0;
-    }
+    section{ padding: var(--space-3) 0; }
 
     .section-head{
       margin-bottom: var(--space-3);
@@ -291,15 +453,9 @@
     }
     .section-head p{
       margin: 0 auto;
-      max-width: 80ch;
+      max-width: 82ch;
       color: var(--muted);
       font-size: var(--p);
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-3);
     }
 
     .card{
@@ -310,32 +466,49 @@
       box-shadow: var(--shadow);
       min-height: 0;
     }
-    .card h3{
-      margin: 0 0 10px;
-      font-size: var(--h3);
-      letter-spacing: -0.02em;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      font-size: var(--p);
+
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      align-items: start;
     }
 
-    /* Transformation step cards */
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+
+    .narrative{
+      max-width: 90ch;
+      margin: 0 auto;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--text);
+      font-size: var(--p);
+    }
+    .narrative p{ margin:0; color: var(--muted); }
+    .narrative strong{ color: var(--text); }
+
     .step-num{
       display:inline-flex;
       align-items:center;
       gap: 10px;
       margin-bottom: 10px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--primary-ink);
     }
+	/*
     .dot{
       width: 10px;
       height: 10px;
       border-radius: 999px;
       background: var(--primary);
     }
+	*/
+
     .bullets{
       margin: 10px 0 0;
       padding-left: 18px;
@@ -343,6 +516,14 @@
       font-size: var(--p);
     }
     .bullets li{ margin: 6px 0; }
+
+    /* Objections */
+    .objection h3{
+      margin:0 0 10px;
+      font-size: var(--h3);
+      letter-spacing: -0.02em;
+    }
+    .objection p{ margin:0; color: var(--muted); font-size: var(--p); }
 
     /* Contrast section */
     .split{
@@ -361,6 +542,7 @@
     .contrast-box h3{
       margin: 0 0 10px;
       font-size: var(--h3);
+      letter-spacing: -0.02em;
     }
     .contrast-flow{
       color: var(--muted);
@@ -381,7 +563,7 @@
     }
     .short-offer{
       margin: 10px auto 0;
-      max-width: 86ch;
+      max-width: 88ch;
       color: var(--muted);
       font-size: var(--p);
     }
@@ -396,9 +578,44 @@
       display:grid;
       place-items:center;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.02em;
     }
+	
+	.calendar-embed{
+	  margin-top: var(--space-3);
+	  background: var(--surface);
+	  border: 1px solid var(--line);
+	  border-radius: var(--radius);
+	  box-shadow: var(--shadow);
+	  padding: var(--space-3);
+	  overflow: hidden;
+	  min-height: 760px;
+	}
+	
+	.calendar-intro{
+	  text-align: center;
+	  margin-bottom: var(--space-2);
+	  font-size: var(--p);
+	  color: var(--muted);
+	}
+
+	.calendar-intro strong{
+      color: var(--text);
+	}
+	
+	.cal-inline-widget{
+	  width: 100%;
+	  min-height: 760px;
+	  overflow: hidden;
+	}
+	
+	@media (max-width: 640px){
+	  .calendar-embed,
+	  .cal-inline-widget{
+	    min-height: 700px;
+	  }
+	}
 
     /* Testimonials */
     .testimonials{
@@ -423,17 +640,9 @@
       font-size: 0.95rem;
       letter-spacing: 0.08em;
     }
-    .quote p{
-      margin: 0;
-      color: var(--muted);
-      font-size: var(--p);
-    }
-    .quote strong{
-      color: var(--text);
-      font-size: 0.98rem;
-    }
+    .quote p{ margin: 0; color: var(--muted); font-size: var(--p); }
+    .quote strong{ color: var(--text); font-size: 0.98rem; }
 
-    /* Footer */
     footer{
       border-top: 1px solid var(--line);
       padding: var(--space-4) 0;
@@ -453,47 +662,205 @@
       flex-wrap: wrap;
     }
 
-    /* Responsive */
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
       .split{ grid-template-columns: 1fr; }
       .testimonials{ grid-template-columns: 1fr; }
-      .topbar-inner{ gap: 10px; }
       .brand-sub{ display:none; }
     }
 
+	@media (max-width: 980px){
+      .brand-sub{
+        display: none;
+      }
+    
+      .topbar-inner{
+        padding: 10px 0;
+      }
+    
+      .btn{
+        padding: 10px 14px;
+        font-size: 0.92rem;
+      }
+    }
+    
+    @media (max-width: 640px){
+      .topbar-inner{
+        gap: 8px;
+      }
+    
+      .brand{
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+    
+      .brand-logo{
+        height: 28px;
+      }
+    
+      .btn{
+        padding: 9px 12px;
+        font-size: 0.86rem;
+      }
+    }
+    
     @media (max-width: 420px){
-      .btn{ width: 100%; }
-      .hero-actions{ width: 100%; }
+	  .hero-actions{
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+      
+      .hero-actions .btn{
+        width: auto;
+        flex: 0 1 auto;
+      }
+      
+      .topbar-inner{
+        gap: 6px;
+        padding: 8px 0;
+      }
+      
+      .brand-logo{
+        height: 24px;
+      }
+      
+      .btn{
+        padding: 8px 10px;
+        font-size: 0.78rem;
+        max-width: 170px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+	  
+	  .btn-text-desktop{
+	    display: none;
+	  }
+	  
+	  .btn-text-mobile{
+	    display: inline;
+	  }
+    }
+    
+    @media (max-width: 360px){
+      .brand-logo{
+        height: 22px;
+      }
+    
+      .btn{
+        padding: 8px 9px;
+        font-size: 0.74rem;
+        max-width: 155px;
+      }
     }
 
-    /* Accessibility */
-    .sr-only{
-      position:absolute;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
-    }
+.cookie-banner{
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  background: rgba(11,18,32,0.96);
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(11,18,32,0.28);
+  padding: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.cookie-banner[hidden]{
+  display: none !important;
+}
+
+.cookie-banner-inner{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cookie-banner p{
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.92);
+}
+
+.cookie-banner a{
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cookie-banner-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn.cookie-reject{
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: none;
+}
+
+.btn.cookie-reject:hover{
+  background: rgba(255,255,255,0.08);
+  transform: none;
+}
+
+.cookie-settings-link{
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (max-width: 640px){
+  .cookie-banner{
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 14px;
+  }
+
+  .cookie-banner .btn{
+    max-width: none;
+  }
+
+  .cookie-banner-actions .btn{
+    width: auto;
+  }
+}
+
   </style>
 </head>
 
 <body>
 
-  <!-- Top bar -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
-        <div class="brand" aria-label="Brand">
-          <div class="logo">H</div>
-          <div>
-            <div class="brand-name">HuwamAi</div>
+        <a class="brand" href="/" aria-label="HuwamAi home">
+          <img src="images/logo.png" alt="HuwamAi" class="brand-logo">
+          <!--
+		  <div class="brand-text">
             <div class="brand-sub">Demand Protection for Private Dental Practices</div>
           </div>
-        </div>
-
-        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+		  -->
+        </a>
+		
+        <a class="btn" href="#book">
+		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
+		  <span class="btn-text-mobile">Book Your Discovery Call</span>
+		</a>
       </div>
     </div>
   </div>
@@ -507,44 +874,65 @@
           <div>
             <div class="kicker">
               <span class="dot" aria-hidden="true"></span>
-              For UK private dental practices generating implant, aligner & cosmetic enquiries
+              For UK private practices generating implant, aligner & cosmetic enquiries
             </div>
 
-            <h1>Most implant and Invisalign enquiries book with whoever answers first.</h1>
+            <!-- HERO FIX: observable truth + specificity, no unverifiable claims -->
+            <h1>When implant or Invisalign enquiries call after hours, they often book with whoever answers first.</h1>
 
             <p class="subhead">
-              Protect high-value treatment enquiries from booking with another practice when your reception is busy or the practice is closed.
+              A Demand Protection Layer that supports your reception team by handling high-value treatment enquiries when reception can’t answer.
             </p>
 
             <p class="support">
-              Private practices invest heavily to generate high-value enquiries.
-              But too often, the final outcome depends on one fragile variable: <strong>whether someone answers the phone.</strong>
+              If your practice generates high-value enquiries, the vulnerability isn’t your marketing.
+              It’s the moments when the phone can’t be answered quickly — busy periods, lunch, evenings, weekends.
+              <strong>Demand Protection closes those gaps.</strong>
             </p>
           </div>
 
           <div>
             <div class="hero-actions">
-              <a class="btn" href="#book">Schedule Your Discovery Call</a>
-              <a class="btn secondary" href="#how">See how it works</a>
+              <a class="btn" href="#book">
+			    <span class="btn-text-desktop">Schedule Your Discovery Call</span>
+			    <span class="btn-text-mobile">Book Your Discovery Call</span>
+		      </a>
+              <a class="btn secondary" href="#moment">See the moment</a>
             </div>
 
             <div class="microproof">
-              Visual cue: <strong>7:42pm</strong> <span class="arrow">→</span> Patient calls <span class="arrow">→</span> Voicemail <span class="arrow">→</span> Calls next practice <span class="arrow">→</span> Consultation booked
+              Example: <strong>7:42pm</strong> <span class="arrow">→</span> Patient calls
+              <span class="arrow">→</span> Voicemail <span class="arrow">→</span> Calls next practice
+              <span class="arrow">→</span> Consultation booked
             </div>
           </div>
         </div>
 
-        <aside class="vsl" aria-label="Video Sales Letter placeholder">
-          <div class="vsl-title">Video overview (placeholder)</div>
-          <div class="vsl-box" role="img" aria-label="Video placeholder">
-            <div>
-              <div class="play" aria-hidden="true">▶</div>
-              <div style="font-weight:800; letter-spacing:-0.02em;">Demand Protection in 90 seconds</div>
-              <p class="vsl-caption">Replace this placeholder with your VSL later.</p>
-            </div>
-          </div>
-          <p class="vsl-caption" style="margin:0;">
-            No AI jargon. Just the reality of how high-value treatment enquiries behave — and how to protect them.
+        <aside class="vsl" aria-label="Video placeholder">
+		  <div class="vsl-title">Demand Protection in 2 mins</div>
+		  
+		  <div class="vsl-video-shell" id="vslShell">
+		    <button class="vsl-overlay" id="vslOverlay" type="button" aria-label="Play video">
+		    	<img src="images/vsl-thumbnail.jpg" alt="Demand Protection video thumbnail" class="vsl-thumbnail">
+		    	<span class="vsl-overlay-inner">
+		    	<span class="vsl-play-icon" aria-hidden="true">▶</span>
+		    	</span>
+		    </button>
+		    
+		    <video
+		    	id="vslVideo"
+		    	class="vsl-video"
+		    	controls
+		    	preload="metadata"
+		    	playsinline
+		    	poster="images/vsl-thumbnail.jpg"
+		    >
+		    	<source src="videos/dps.mp4" type="video/mp4"/>
+		    	Your browser does not support the video tag.
+		    </video>
+		  </div>          
+		  <p class="vsl-caption" style="margin:0;">
+            The patient behaviour behind “who answers first” — and how practices remove the vulnerability without changing how reception works day-to-day.
           </p>
         </aside>
 
@@ -552,30 +940,73 @@
     </div>
   </header>
 
-  <!-- COMPANY LOGOS STRIP (credibility placeholders) -->
+  <!-- COMPANY LOGOS STRIP (optional placeholders) -->
+  <!--
   <div class="logo-strip" aria-label="Credibility logo strip">
     <div class="container">
       <div class="logo-strip-inner">
-        <div class="logo-pill">Company / Association Logo</div>
-        <div class="logo-pill">Company / Association Logo</div>
-        <div class="logo-pill">Company / Association Logo</div>
-        <div class="logo-pill">Company / Association Logo</div>
+        <div class="logo-pill">Logo / Association (optional)</div>
+        <div class="logo-pill">Logo / Association (optional)</div>
+        <div class="logo-pill">Logo / Association (optional)</div>
+        <div class="logo-pill">Logo / Association (optional)</div>
       </div>
     </div>
   </div>
+  -->
+
+  <!-- ADDED: THE MOMENT (narrative education) -->
+  <section id="moment" aria-label="The Moment">
+    <div class="container">
+      <div class="section-head">
+        <h2>The moment most practices never see</h2>
+        <p>A simple, common scenario that explains why “call back tomorrow” often isn’t enough for high-value enquiries.</p>
+      </div>
+
+      <div class="card">
+        <div class="narrative">
+          <p><strong>Tuesday evening.</strong></p>
+          <p>A patient searches: <strong>“Dental implants near me.”</strong></p>
+          <p>Your practice appears. They call.</p>
+          <p>Reception has gone home — or the front desk is already overloaded.</p>
+          <p>The call goes to voicemail.</p>
+          <p>So they try the next practice in the search results.</p>
+          <p>That practice answers. The consultation gets booked there.</p>
+          <p><strong>Not because they were better. Simply because they answered.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADDED: REALITY / BEHAVIOUR EXPLANATION -->
+  <section aria-label="The Reality">
+    <div class="container">
+      <div class="section-head">
+        <h2>This is not about clinical quality. It’s about response speed.</h2>
+        <p>High-value treatment enquiries behave differently from routine calls.</p>
+      </div>
+
+      <div class="card">
+        <div class="narrative">
+          <p>When someone is considering implants, Invisalign or cosmetic work, they often contact <strong>multiple practices</strong> in the same sitting.</p>
+          <p>Some will submit forms. Some may book online. But many will <strong>call</strong> because they want to ask a quick question, confirm availability, or speak to someone before committing.</p>
+          <p>If that call reaches voicemail, most don’t wait — they try the next practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- THE TRANSFORMATION (3-step delivery system) -->
   <section id="how" aria-label="The Transformation">
     <div class="container">
       <div class="section-head">
         <h2>The Transformation</h2>
-        <p>From availability-dependent enquiries → protected demand, using a simple 3-step activation process.</p>
+        <p>From availability-dependent enquiries → protected demand, using our 3-step activation process.</p>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 1 — Overflow & Out-of-Hours Activation</div>
-          <p>
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 1: Overflow & Out-of-Hours Activation</div>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">
             A Demand Protection Layer is configured around your phone handling and booking structure, then activates automatically when reception cannot answer.
           </p>
           <ul class="bullets">
@@ -586,8 +1017,8 @@
         </div>
 
         <div class="card">
-          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 2 — Treatment Intent Capture + Booking</div>
-          <p>
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 2: Treatment Intent Capture + Booking</div>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">
             When it activates, the enquiry is handled immediately so the caller can be booked into an appropriate consultation slot rather than waiting.
           </p>
           <ul class="bullets">
@@ -599,8 +1030,8 @@
         </div>
 
         <div class="card">
-          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 3 — Demand Visibility</div>
-          <p>
+          <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 3: Demand Visibility</div>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">
             You receive visibility into treatment demand that previously disappeared during busy periods and after hours.
           </p>
           <ul class="bullets">
@@ -610,7 +1041,6 @@
           </ul>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -619,21 +1049,53 @@
     <div class="container">
       <div class="section-head">
         <h2>The Benefits</h2>
-        <p>Clear, practical outcomes — without inflated claims.</p>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <h3>After-hours enquiries are still handled</h3>
-          <p>High-value callers aren’t forced into voicemail, even in the evenings and weekends.</p>
+          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">After-hours enquiries are still handled</h3>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">High-value callers aren’t forced into voicemail, even in the evenings and weekends.</p>
         </div>
+
         <div class="card">
-          <h3>Busy-period gaps stop causing silent losses</h3>
-          <p>When reception is overloaded, enquiries are still captured rather than drifting to the next practice.</p>
+          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">Busy-period gaps stop causing silent losses</h3>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">When reception is overloaded, enquiries are still captured rather than drifting to the next practice.</p>
         </div>
+
         <div class="card">
-          <h3>Consultations can be booked immediately</h3>
-          <p>Instead of relying on the caller to submit a form, wait, or ring back later.</p>
+          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">Consultations can be booked immediately</h3>
+          <p style="margin:0;color:var(--muted);font-size:var(--p);">Instead of relying on the caller to submit a form, wait, or ring back later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADDED: OBJECTION HANDLING -->
+  <section aria-label="Common Questions">
+    <div class="container">
+      <div class="section-head">
+        <h2>Common questions practice owners ask</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="card objection">
+          <h3>“Why not just call them back tomorrow?”</h3>
+          <p>Because many implant and aligner enquiries contact multiple practices at once. If another practice answers immediately and offers a slot, that consultation is often booked there — even if you call back later. Demand Protection captures the enquiry at the moment it happens.</p>
+        </div>
+
+        <div class="card objection">
+          <h3>“Patients can book or request a callback from our website.”</h3>
+          <p>That helps — and Demand Protection complements it. Many high-value callers still phone to ask a quick question, confirm availability or speak to someone before committing. If the call reaches voicemail, they usually try the next practice rather than filling a form and waiting.</p>
+        </div>
+
+        <div class="card objection">
+          <h3>“Our patients are loyal. They’ll come to us.”</h3>
+          <p>Existing patients usually will. This system is for new high-value enquiries — the implant and Invisalign callers comparing options quickly and booking with whoever engages first.</p>
+        </div>
+
+        <div class="card objection">
+          <h3>“Our reception usually answers.”</h3>
+          <p>Most of the time, yes. This is for the moments they can’t — busy periods and after-hours windows where demand quietly books elsewhere. It only needs to happen occasionally to matter.</p>
         </div>
       </div>
     </div>
@@ -670,28 +1132,58 @@
       </div>
 
       <div class="cta-band">
-        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+        <a class="btn" href="#book">
+		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
+		  <span class="btn-text-mobile">Book Your Discovery Call</span>
+		</a>
         <p class="short-offer">
-          High-value treatment enquiries often contact multiple practices at once.
-          Demand Protection ensures you don’t lose enquiries simply because the call happened outside reception availability.
+          If your practice generates high-value enquiries, Demand Protection removes the vulnerability that depends on reception availability.
         </p>
       </div>
 
-      <div class="calendar" id="book" aria-label="Calendar placeholder">
-        CALENDAR (Embed your booking widget here)
-      </div>
+      <div class="calendar-embed" id="book" aria-label="Schedule a discovery call">
+  
+	    <div class="calendar-intro">
+	      <p>
+	        <strong>Pick a time that works for you below.</strong><br>If no suitable slots are available, check back next week — new availability opens regularly. 
+	    	Apologies for any inconvenience!
+	      </p>
+	    </div>
+	    
+	    <div id="my-cal-inline-15min" class="cal-inline-widget"></div>
+	  
+	  </div>
+
+	  <!-- Cal inline embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "15min", {origin:"https://app.cal.com"});
+
+Cal.ns["15min"]("inline", {
+  elementOrSelector:"#my-cal-inline-15min",
+  config: {
+    layout:"column_view",
+    useSlotsViewOnSmallScreen:true
+  },
+  calLink: "huwamai/15min"
+});
+
+Cal.ns["15min"]("ui", {
+  hideEventTypeDetails:true,
+  layout:"column_view"
+});
+  </script>
+  <!-- Cal inline embed code ends -->
     </div>
   </section>
 
-  <!-- TESTIMONIALS (placeholders until you have dental-specific proof) -->
+  <!-- TESTIMONIALS (placeholders for now) -->
+  <!--
   <section aria-label="Testimonials">
     <div class="container">
       <div class="section-head">
-        <h2>What practice owners say (placeholder)</h2>
-        <p>
-          Until you have dental-specific testimonials, keep this honest.
-          Use structural credibility and replace these blocks once real feedback exists.
-        </p>
+        <h2>Results & feedback (placeholder)</h2>
+        <p>Until you have dental-specific testimonials, keep this honest. Replace these blocks as soon as you have real practice feedback.</p>
       </div>
 
       <div class="testimonials">
@@ -718,28 +1210,31 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- FINAL CTA + CALENDAR -->
   <section aria-label="Final Call To Action">
     <div class="container">
       <div class="section-head">
         <h2>Schedule Your Discovery Call</h2>
-        <p>
-          We’ll confirm fit, map where demand is currently vulnerable (busy periods / after hours),
-          and outline the activation steps for your practice.
-        </p>
+        <p>We’ll confirm fit, map where demand is currently vulnerable (busy periods / after hours), and outline the activation steps for your practice.</p>
       </div>
 
       <div class="cta-band">
-        <a class="btn" href="#book">Schedule Your Discovery Call</a>
+        <a class="btn" href="#book">
+		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
+		  <span class="btn-text-mobile">Book Your Discovery Call</span>
+		</a>
         <p class="short-offer">
           Worst case: you leave with a clear view of how demand protection would work in your practice.
         </p>
       </div>
 
-      <div class="calendar" aria-label="Second calendar placeholder">
+      <!--
+	  <div class="calendar" aria-label="Second calendar placeholder">
         CALENDAR (Second embed / repeated CTA)
       </div>
+	  -->
     </div>
   </section>
 
@@ -748,22 +1243,460 @@
       <div class="footer-inner">
         <div style="display:flex;align-items:center;gap:10px;">
           <div class="logo" style="width:34px;height:34px;border-radius:12px;">H</div>
-          <div>© <span id="year"></span> HuwamAi</div>
+          <div>© 2026 HuwamAi</div>
         </div>
 
         <div class="footer-links">
-          <a href="#" aria-label="Privacy">Privacy</a>
-          <a href="#" aria-label="Terms">Terms</a>
-          <a href="#" aria-label="Contact">Contact</a>
+          <a href="privacy-policy.html" aria-label="Privacy Policy">Privacy Policy</a>
+          <a href="terms-of-use.html" aria-label="Terms of Use">Terms of Use</a>
+          <button type="button" class="cookie-settings-link" id="cookieSettingsBtn" aria-label="Cookie Settings">Cookie Settings</button>
         </div>
       </div>
     </div>
-
-    <script>
-      // Tiny script only to set year; remove if you want zero JS.
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
   </footer>
+
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie preferences" hidden>
+  <div class="cookie-banner-inner">
+    <p>
+      We use optional cookies to understand how visitors use this page, and improve performance.
+      These cookies only load if you choose <strong>Accept</strong>.
+      You can change your choice at any time using <strong>Cookie Settings</strong> in the footer.
+      See our <a href="privacy-policy.html">Privacy Policy</a> for details.
+    </p>
+    <div class="cookie-banner-actions">
+      <button type="button" class="btn" id="acceptAnalyticsBtn">Accept</button>
+      <button type="button" class="btn cookie-reject" id="rejectAnalyticsBtn">Reject</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function () {
+  const STORAGE_KEY = "huwamai_session_id";
+  const VISITOR_STORAGE_KEY = "huwamai_first_seen_at";
+  const PAGE_ID = "demand_protection_lp";
+  const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+  const CONSENT = window.HuwamAiConsent;
+
+  function getSessionId() {
+    let id = sessionStorage.getItem(STORAGE_KEY);
+    if (!id) {
+      id = "sess_" + Math.random().toString(36).slice(2) + "_" + Date.now();
+      sessionStorage.setItem(STORAGE_KEY, id);
+    }
+    return id;
+  }
+
+  function getVisitorStatus() {
+    try {
+      const existing = localStorage.getItem(VISITOR_STORAGE_KEY);
+      if (existing) {
+        return { type: "returning", firstSeenAt: existing };
+      }
+      const now = new Date().toISOString();
+      localStorage.setItem(VISITOR_STORAGE_KEY, now);
+      return { type: "new", firstSeenAt: now };
+    } catch (e) {
+      return { type: "unknown", firstSeenAt: "" };
+    }
+  }
+
+  const sessionId = getSessionId();
+  const visitorStatus = getVisitorStatus();
+  const params = new URLSearchParams(window.location.search);
+  const leadId = params.get("lead_id") || null;
+  const trackedScrollMilestones = new Set();
+  const trackedTimeMilestones = new Set();
+  const pageSeenSections = new Set();
+  let pageVisibleStart = Date.now();
+  let activeVisibleMs = 0;
+  let pageViewSent = false;
+  let calTrackingRegistered = false;
+
+  function getCommonParams(extraData) {
+    const utms = {};
+    UTM_KEYS.forEach(function (key) {
+      const value = params.get(key);
+      if (value) utms[key] = value;
+    });
+
+    return Object.assign({
+      page_id: PAGE_ID,
+      session_id: sessionId,
+      lead_id: leadId,
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+      page_title: document.title,
+      referrer: document.referrer || "",
+      viewport_width: window.innerWidth,
+      viewport_height: window.innerHeight,
+      device_type: window.innerWidth <= 640 ? "mobile" : (window.innerWidth <= 980 ? "tablet" : "desktop"),
+      visitor_type: visitorStatus.type,
+      visitor_first_seen_at: visitorStatus.firstSeenAt
+    }, utms, extraData || {});
+  }
+
+  function trackEvent(eventName, extraData) {
+    const payload = getCommonParams(extraData);
+    console.log("Analytics event:", eventName, payload);
+    if (window.__analyticsEnabled && typeof window.gtag === "function") {
+      window.gtag("event", eventName, payload);
+    }
+  }
+
+  function sendPageViewOnce() {
+    if (pageViewSent || !window.__analyticsEnabled || typeof window.gtag !== "function") return;
+    pageViewSent = true;
+    window.gtag("event", "page_view", getCommonParams({
+      page_location: window.location.href,
+      page_referrer: document.referrer || ""
+    }));
+    trackEvent("lp_view");
+  }
+
+  function updateVisibleTime() {
+    if (!document.hidden) {
+      activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
+      pageVisibleStart = Date.now();
+    }
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
+    } else {
+      pageVisibleStart = Date.now();
+    }
+  });
+
+  [15, 30, 60, 120, 180].forEach(function (seconds) {
+    setTimeout(function () {
+      if (trackedTimeMilestones.has(seconds)) return;
+      trackedTimeMilestones.add(seconds);
+      trackEvent("lp_time_on_page", { seconds_on_page: seconds });
+    }, seconds * 1000);
+  });
+
+  window.addEventListener("scroll", function () {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop || 0;
+    const scrollHeight = doc.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+    const percent = Math.round((scrollTop / scrollHeight) * 100);
+
+    [25, 50, 75, 90].forEach(function (milestone) {
+      if (percent >= milestone && !trackedScrollMilestones.has(milestone)) {
+        trackedScrollMilestones.add(milestone);
+        trackEvent("lp_scroll_depth", { percent_scrolled: milestone });
+      }
+    });
+  }, { passive: true });
+
+  const sectionMap = [
+    ["hero", ".hero"],
+    ["moment", "#moment"],
+    ["transformation", "#how"],
+    ["contrast", 'section[aria-label="The Contrast"]'],
+    ["booking_widget", "#book"],
+    ["final_cta", 'section[aria-label="Final Call To Action"]']
+  ];
+
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const sectionName = entry.target.getAttribute("data-section-name");
+          if (sectionName && !pageSeenSections.has(sectionName)) {
+            pageSeenSections.add(sectionName);
+            trackEvent("lp_section_view", { section_name: sectionName });
+          }
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sectionMap.forEach(function (item) {
+      const sectionName = item[0];
+      const el = document.querySelector(item[1]);
+      if (el) {
+        el.setAttribute("data-section-name", sectionName);
+        sectionObserver.observe(el);
+      }
+    });
+  }
+
+  document.querySelectorAll("a.btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const label = (btn.textContent || "").trim().replace(/\s+/g, " ");
+      const href = btn.getAttribute("href") || "";
+      const parentSection = btn.closest("header, section, .topbar");
+      let placement = "unknown";
+
+      if (parentSection) {
+        if (parentSection.classList.contains("topbar")) placement = "topbar";
+        else if (parentSection.classList.contains("hero")) placement = "hero";
+        else placement = parentSection.getAttribute("aria-label") || parentSection.id || parentSection.className || "section";
+      }
+
+      trackEvent("lp_cta_click", {
+        cta_label: label,
+        cta_href: href,
+        cta_placement: placement
+      });
+    });
+  });
+
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    link.addEventListener("click", function () {
+      const rawHref = link.getAttribute("href") || "";
+      if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("mailto:") || rawHref.startsWith("tel:")) return;
+
+      let url;
+      try {
+        url = new URL(rawHref, window.location.href);
+      } catch (e) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) {
+        trackEvent("outbound_link_click", {
+          outbound_url: url.href,
+          outbound_domain: url.hostname,
+          link_text: (link.textContent || "").trim().replace(/\s+/g, " ")
+        });
+      }
+    });
+  });
+
+  const video = document.getElementById("vslVideo");
+  const overlay = document.getElementById("vslOverlay");
+  const shell = document.getElementById("vslShell");
+
+  if (video && overlay && shell) {
+    let watchedSeconds = 0;
+    let lastTimestamp = 0;
+    let isPlaying = false;
+    const quartilesTracked = new Set();
+
+    function trackVideoEvent(eventName, extraData) {
+      trackEvent(eventName, Object.assign({
+        video_id: "dps_vsl",
+        video_current_time: Number(video.currentTime || 0).toFixed(2),
+        video_duration: Number(video.duration || 0).toFixed(2),
+        watched_seconds: Number(watchedSeconds).toFixed(2)
+      }, extraData || {}));
+    }
+
+    function startPlayback() {
+      video.play().then(function () {
+        shell.classList.add("is-playing");
+      }).catch(function (err) {
+        console.warn("Video play was blocked:", err);
+      });
+    }
+
+    overlay.addEventListener("click", function () {
+      trackVideoEvent("vsl_overlay_click");
+      startPlayback();
+    });
+
+    video.addEventListener("play", function () {
+      isPlaying = true;
+      lastTimestamp = Date.now();
+      shell.classList.add("is-playing");
+      trackVideoEvent("vsl_play");
+    });
+
+    video.addEventListener("pause", function () {
+      if (isPlaying) {
+        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+      }
+      isPlaying = false;
+      trackVideoEvent("vsl_pause");
+    });
+
+    video.addEventListener("ended", function () {
+      if (isPlaying) {
+        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+      }
+      isPlaying = false;
+      quartilesTracked.add(100);
+      trackVideoEvent("vsl_complete", { percent_watched: 100 });
+    });
+
+    video.addEventListener("timeupdate", function () {
+      if (!video.duration || !isFinite(video.duration)) return;
+      const percent = (video.currentTime / video.duration) * 100;
+
+      [25, 50, 75, 100].forEach(function (milestone) {
+        if (percent >= milestone && !quartilesTracked.has(milestone)) {
+          quartilesTracked.add(milestone);
+          trackVideoEvent("vsl_progress", { percent_watched: milestone });
+        }
+      });
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden && isPlaying) {
+        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+        lastTimestamp = Date.now();
+      } else if (!document.hidden && isPlaying) {
+        lastTimestamp = Date.now();
+      }
+    });
+  }
+
+  function registerCalTracking() {
+    if (calTrackingRegistered) return true;
+    try {
+      if (!window.Cal || !window.Cal.ns || !window.Cal.ns["15min"]) return false;
+
+      const calNs = window.Cal.ns["15min"];
+
+      calNs("on", {
+        action: "linkReady",
+        callback: function () {
+          trackEvent("booking_widget_ready");
+        }
+      });
+
+      calNs("on", {
+        action: "linkFailed",
+        callback: function (e) {
+          const data = (e && e.detail && e.detail.data) || {};
+          trackEvent("booking_widget_failed", {
+            error_code: data.code || "",
+            error_message: data.msg || ""
+          });
+        }
+      });
+
+      calNs("on", {
+        action: "eventTypeSelected",
+        callback: function (e) {
+          const data = (e && e.detail && e.detail.data) || {};
+          trackEvent("booking_event_type_selected", {
+            event_type_title: data.eventType && data.eventType.title ? data.eventType.title : ""
+          });
+        }
+      });
+
+      calNs("on", {
+        action: "bookingSuccessfulV2",
+        callback: function (e) {
+          const data = (e && e.detail && e.detail.data) || {};
+          trackEvent("booking_complete", {
+            booking_uid: data.uid || "",
+            booking_title: data.title || "",
+            booking_status: data.status || "",
+            booking_start_time: data.startTime || "",
+            booking_end_time: data.endTime || "",
+            booking_event_type_id: data.eventTypeId || "",
+            payment_required: data.paymentRequired ? "true" : "false",
+            is_recurring: data.isRecurring ? "true" : "false"
+          });
+        }
+      });
+
+      calNs("on", {
+        action: "rescheduleBookingSuccessfulV2",
+        callback: function (e) {
+          const data = (e && e.detail && e.detail.data) || {};
+          trackEvent("booking_rescheduled", {
+            booking_uid: data.uid || "",
+            booking_title: data.title || "",
+            booking_status: data.status || "",
+            booking_start_time: data.startTime || "",
+            booking_end_time: data.endTime || ""
+          });
+        }
+      });
+
+      calNs("on", {
+        action: "bookingCancelled",
+        callback: function (e) {
+          const data = (e && e.detail && e.detail.data) || {};
+          const booking = data.booking || {};
+          trackEvent("booking_cancelled", {
+            booking_uid: booking.uid || "",
+            cancellation_reason: booking.cancellationReason || ""
+          });
+        }
+      });
+
+      calTrackingRegistered = true;
+      return true;
+    } catch (err) {
+      console.warn("Cal tracking registration failed:", err);
+      return false;
+    }
+  }
+
+  let calRegistrationAttempts = 0;
+  const calInterval = setInterval(function () {
+    calRegistrationAttempts += 1;
+    if (registerCalTracking() || calRegistrationAttempts > 40) {
+      clearInterval(calInterval);
+    }
+  }, 500);
+
+  function showCookieBanner(forceOpen) {
+    const banner = document.getElementById("cookieBanner");
+    if (!banner) return;
+    const state = CONSENT && CONSENT.getState ? CONSENT.getState() : null;
+    banner.hidden = !(forceOpen || !state);
+  }
+
+  function hideCookieBanner() {
+    const banner = document.getElementById("cookieBanner");
+    if (banner) banner.hidden = true;
+  }
+
+  const acceptBtn = document.getElementById("acceptAnalyticsBtn");
+  const rejectBtn = document.getElementById("rejectAnalyticsBtn");
+  const settingsBtn = document.getElementById("cookieSettingsBtn");
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", function () {
+      if (CONSENT) CONSENT.acceptAnalytics();
+      hideCookieBanner();
+      trackEvent("cookie_consent_updated", { analytics_choice: "accepted" });
+      sendPageViewOnce();
+    });
+  }
+
+  if (rejectBtn) {
+    rejectBtn.addEventListener("click", function () {
+      if (CONSENT) CONSENT.rejectAnalytics();
+      hideCookieBanner();
+      console.log("Analytics consent rejected. Optional analytics remains disabled.");
+    });
+  }
+
+  if (settingsBtn) {
+    settingsBtn.addEventListener("click", function () {
+      showCookieBanner(true);
+    });
+  }
+
+  showCookieBanner(false);
+
+  if (window.__analyticsEnabled) {
+    sendPageViewOnce();
+  }
+
+  window.addEventListener("pagehide", function () {
+    updateVisibleTime();
+    trackEvent("lp_exit", {
+      seconds_visible: Math.round(activeVisibleMs / 1000),
+      sections_seen: Array.from(pageSeenSections).join(","),
+      scroll_milestones_reached: Array.from(trackedScrollMilestones).sort(function (a, b) { return a - b; }).join(",")
+    });
+  });
+})();
+</script>
+
 
 </body>
 </html>

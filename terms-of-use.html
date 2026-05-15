@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Use | HuwamAi</title>
+  <meta name="description" content="Terms of Use for HuwamAi." />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-900BPMY9KK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-900BPMY9KK');
+  </script>
+  <style>
+    :root{
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #0B1220;
+      --muted: #46536B;
+      --line: rgba(11, 18, 32, 0.10);
+      --primary: #1F6FEB;
+      --primary-ink: #0D2A66;
+      --cta-bg: #FFD814;
+      --cta-border: #FCD200;
+      --cta-hover: #F7CA00;
+      --cta-text: #111111;
+      --shadow: 0 10px 30px rgba(11,18,32,0.08);
+      --radius: 18px;
+      --container: 1120px;
+      --h1: clamp(1.7rem, 3.4vw, 2.8rem);
+      --h2: clamp(1.2rem, 2.2vw, 1.55rem);
+      --h3: clamp(1.02rem, 1.8vw, 1.18rem);
+      --p: clamp(1rem, 1.2vw, 1.05rem);
+      --space-1: clamp(8px, 1.2vw, 14px);
+      --space-2: clamp(12px, 1.6vw, 18px);
+      --space-3: clamp(16px, 2.2vw, 26px);
+      --space-4: clamp(22px, 3vw, 40px);
+      --space-5: clamp(28px, 3.8vw, 54px);
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; }
+    .container{
+      width: min(var(--container), calc(100% - 2*var(--space-3)));
+      margin: 0 auto;
+    }
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,249,252,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      min-width: 0;
+      padding: 10px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      min-width:0;
+      text-decoration:none;
+      flex:1 1 auto;
+    }
+    .brand-logo{
+      display:block;
+      height: clamp(24px, 8vw, 36px);
+      width:auto;
+      max-width:100%;
+      object-fit:contain;
+      min-width:0;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--cta-border);
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.1;
+      text-decoration: none;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+      transition: transform 120ms ease, background 120ms ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn:hover{ background: var(--cta-hover); transform: translateY(-1px); }
+    .hero{
+      padding: var(--space-4) 0 var(--space-3);
+    }
+    .hero-card,
+    .legal-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card{
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:0.92rem;
+      color: var(--primary-ink);
+      background: rgba(31,111,235,0.08);
+      border: 1px solid rgba(31,111,235,0.18);
+      padding: 8px 12px;
+      border-radius:999px;
+      width: fit-content;
+      margin-bottom: var(--space-2);
+    }
+    h1{
+      font-size: var(--h1);
+      line-height:1.08;
+      letter-spacing:-0.03em;
+      margin:0 0 var(--space-2);
+    }
+    .lede{
+      margin:0;
+      font-size: clamp(1.02rem, 1.35vw, 1.15rem);
+      color: var(--muted);
+      max-width: 68ch;
+    }
+    .legal-card{
+      padding: var(--space-4);
+    }
+    .meta{
+      display:grid;
+      gap:8px;
+      padding: 0 0 var(--space-3);
+      margin-bottom: var(--space-3);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .note{
+      background: rgba(31,111,235,0.06);
+      border: 1px solid rgba(31,111,235,0.16);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: var(--primary-ink);
+      margin-bottom: var(--space-3);
+    }
+    .legal-section + .legal-section{
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+    h2{
+      margin:0 0 10px;
+      font-size: var(--h2);
+      letter-spacing: -0.02em;
+    }
+    h3{
+      margin: 18px 0 8px;
+      font-size: var(--h3);
+      letter-spacing: -0.01em;
+    }
+    p, li{
+      font-size: var(--p);
+      color: var(--muted);
+    }
+    p{ margin: 0 0 12px; }
+    ul{
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li{ margin-top: 8px; }
+    strong{ color: var(--text); }
+    footer{
+      border-top: 1px solid var(--line);
+      padding: var(--space-4) 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: var(--space-4);
+    }
+    .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .footer-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    @media (max-width: 640px){
+      .btn{
+        padding: 9px 12px;
+        font-size: 0.86rem;
+      }
+      .hero-card,
+      .legal-card{
+        padding: var(--space-3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html" aria-label="HuwamAi home">
+          <img src="images\logo.png" alt="HuwamAi" class="brand-logo">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="hero">
+    <div class="container">
+      <section class="hero-card" aria-label="Terms intro">
+        <div class="eyebrow">Terms of Use</div>
+        <h1>Terms for using this website</h1>
+        <p class="lede">These terms govern use of the HuwamAi website. They do not replace any separate service agreement, proposal, or statement of work entered into for paid services.</p>
+      </section>
+
+      <section class="legal-card" aria-label="Terms body">
+        <div class="meta">
+          <div><strong>Last updated:</strong> 18 March 2026</div>
+          <div><strong>Business:</strong> HuwamAi</div>
+          <div><strong>Contact:</strong> info@huwamai.com</div>
+        </div>
+
+        <!--
+		<div class="note">
+          Replace the placeholder business name, address, and contact details before publishing. If you later offer client portals, software access, or downloadable resources, expand these terms rather than pretending this short version covers everything.
+        </div>
+		-->
+
+        <section class="legal-section">
+          <h2>1. Who these terms apply to</h2>
+          <p>These Terms of Use apply to anyone who visits or uses this website. By using the site, you agree to these terms. If you do not agree, do not use the site.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>2. About this website</h2>
+          <p>This website is operated by HuwamAi. It is intended to provide information about HuwamAi and allow prospective clients to enquire about services or book an initial call.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>3. Permitted use</h2>
+          <p>You may use this website only for lawful purposes. You agree not to:</p>
+          <ul>
+            <li>misuse the site or attempt to interfere with its normal operation;</li>
+            <li>attempt to gain unauthorised access to the site, servers, forms, or associated systems;</li>
+            <li>submit false, misleading, malicious, or unlawful content through any form or contact channel;</li>
+            <li>copy, scrape, reproduce, or republish site content for commercial use without permission.</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>4. Information on this website</h2>
+          <p>The content on this site is provided for general information only. It is not legal advice, regulatory advice, clinical advice, or a guarantee of any particular business result.</p>
+          <p>We make reasonable efforts to keep information accurate and up to date, but we do not guarantee that all content is complete, current, or error-free.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>5. Discovery calls and enquiries</h2>
+          <p>Submitting an enquiry or booking a discovery call does not create a client relationship, partnership, or binding obligation for either party to proceed.</p>
+          <p>Any paid work is subject to a separate written agreement covering scope, pricing, responsibilities, data handling, and any relevant implementation or support terms.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>6. No guarantee of outcomes</h2>
+          <p>Any examples, scenarios, positioning statements, or commercial illustrations on this site are for explanatory purposes unless expressly stated otherwise. They are not promises of revenue, bookings, savings, compliance outcomes, or operational performance.</p>
+          <p>This is important because service outcomes depend on factors outside our control, including your systems, staff processes, demand quality, implementation decisions, and third-party tools.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>7. Intellectual property</h2>
+          <p>Unless otherwise stated, all content on this website, including copy, design, branding, graphics, and layout, belongs to HuwamAi or is used under licence.</p>
+          <p>You may not reproduce, distribute, modify, create derivative works from, or commercially exploit website content without prior written permission.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>8. Links to third-party services</h2>
+          <p>This site may include links to third-party services such as scheduling tools or communication platforms. We are not responsible for the content, availability, or privacy practices of those third-party services.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>9. Limitation of liability</h2>
+          <p>To the fullest extent permitted by law, HuwamAi excludes liability for any indirect, incidental, special, or consequential loss arising from use of this website or reliance on its content.</p>
+          <p>Nothing in these terms excludes liability that cannot lawfully be excluded under applicable law, including liability for fraud or fraudulent misrepresentation.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>10. Website availability</h2>
+          <p>We do not guarantee that the website will always be available, uninterrupted, secure, or free from bugs or errors. We may suspend, withdraw, or change any part of the site without notice.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>11. Privacy</h2>
+          <p>Your use of this website is also subject to our <a href="privacy-policy.html"><strong>Privacy Policy</strong></a>, which explains how personal data is handled.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>12. Changes to these terms</h2>
+          <p>We may update these Terms of Use at any time. The latest version will always be published on this page with the updated date shown at the top.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>13. Governing law</h2>
+          <p>These terms are governed by the laws of England and Wales, unless a different jurisdiction is required by mandatory law.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>14. Contact</h2>
+          <p>Questions about these terms can be sent to: <strong>info@huwamai.com</strong>.</p>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 HuwamAi</div>
+        <div class="footer-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-use.html">Terms of Use</a>
+          <a href="index.html#book">Book a call</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

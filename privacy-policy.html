@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy | HuwamAi</title>
+  <meta name="description" content="Privacy Policy for HuwamAi." />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-900BPMY9KK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-900BPMY9KK');
+  </script>
+  <style>
+    :root{
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #0B1220;
+      --muted: #46536B;
+      --line: rgba(11, 18, 32, 0.10);
+      --primary: #1F6FEB;
+      --primary-ink: #0D2A66;
+      --cta-bg: #FFD814;
+      --cta-border: #FCD200;
+      --cta-hover: #F7CA00;
+      --cta-text: #111111;
+      --shadow: 0 10px 30px rgba(11,18,32,0.08);
+      --radius: 18px;
+      --container: 1120px;
+      --h1: clamp(1.7rem, 3.4vw, 2.8rem);
+      --h2: clamp(1.2rem, 2.2vw, 1.55rem);
+      --h3: clamp(1.02rem, 1.8vw, 1.18rem);
+      --p: clamp(1rem, 1.2vw, 1.05rem);
+      --space-1: clamp(8px, 1.2vw, 14px);
+      --space-2: clamp(12px, 1.6vw, 18px);
+      --space-3: clamp(16px, 2.2vw, 26px);
+      --space-4: clamp(22px, 3vw, 40px);
+      --space-5: clamp(28px, 3.8vw, 54px);
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; }
+    .container{
+      width: min(var(--container), calc(100% - 2*var(--space-3)));
+      margin: 0 auto;
+    }
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,249,252,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      min-width: 0;
+      padding: 10px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      min-width:0;
+      text-decoration:none;
+      flex:1 1 auto;
+    }
+    .brand-logo{
+      display:block;
+      height: clamp(24px, 8vw, 36px);
+      width:auto;
+      max-width:100%;
+      object-fit:contain;
+      min-width:0;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--cta-border);
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.1;
+      text-decoration: none;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+      transition: transform 120ms ease, background 120ms ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn:hover{ background: var(--cta-hover); transform: translateY(-1px); }
+    .hero{
+      padding: var(--space-4) 0 var(--space-3);
+    }
+    .hero-card,
+    .legal-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card{
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:0.92rem;
+      color: var(--primary-ink);
+      background: rgba(31,111,235,0.08);
+      border: 1px solid rgba(31,111,235,0.18);
+      padding: 8px 12px;
+      border-radius:999px;
+      width: fit-content;
+      margin-bottom: var(--space-2);
+    }
+    h1{
+      font-size: var(--h1);
+      line-height:1.08;
+      letter-spacing:-0.03em;
+      margin:0 0 var(--space-2);
+    }
+    .lede{
+      margin:0;
+      font-size: clamp(1.02rem, 1.35vw, 1.15rem);
+      color: var(--muted);
+      max-width: 68ch;
+    }
+    .legal-card{
+      padding: var(--space-4);
+    }
+    .meta{
+      display:grid;
+      gap:8px;
+      padding: 0 0 var(--space-3);
+      margin-bottom: var(--space-3);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .note{
+      background: rgba(31,111,235,0.06);
+      border: 1px solid rgba(31,111,235,0.16);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: var(--primary-ink);
+      margin-bottom: var(--space-3);
+    }
+    .legal-section + .legal-section{
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+    h2{
+      margin:0 0 10px;
+      font-size: var(--h2);
+      letter-spacing: -0.02em;
+    }
+    h3{
+      margin: 18px 0 8px;
+      font-size: var(--h3);
+      letter-spacing: -0.01em;
+    }
+    p, li{
+      font-size: var(--p);
+      color: var(--muted);
+    }
+    p{ margin: 0 0 12px; }
+    ul{
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li{ margin-top: 8px; }
+    strong{ color: var(--text); }
+    .contact-box{
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+    footer{
+      border-top: 1px solid var(--line);
+      padding: var(--space-4) 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: var(--space-4);
+    }
+    .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .footer-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    @media (max-width: 640px){
+      .btn{
+        padding: 9px 12px;
+        font-size: 0.86rem;
+      }
+      .hero-card,
+      .legal-card{
+        padding: var(--space-3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html" aria-label="HuwamAi home">
+          <img src="images\logo.png" alt="HuwamAi" class="brand-logo">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="hero">
+    <div class="container">
+      <section class="hero-card" aria-label="Privacy policy intro">
+        <div class="eyebrow">Privacy Policy</div>
+        <h1>How HuwamAi handles personal data</h1>
+        <p class="lede">This policy explains what personal data we collect through this website and during early service enquiries, why we use it, who we share it with, and the choices available to you.</p>
+      </section>
+
+      <section class="legal-card" aria-label="Privacy policy body">
+        <div class="meta">
+          <div><strong>Last updated:</strong> 15 March 2026</div>
+          <div><strong>Business:</strong> HuwamAi</div>
+          <div><strong>Contact:</strong> info@huwamai.com</div>
+        </div>
+
+        <!--
+		<div class="note">
+          Replace the placeholder contact details in this page before publishing. If you use analytics, cookies, a scheduler, CRM, or telephony providers, make sure the named providers in section 6 match what you actually use.
+        </div>
+		-->
+
+        <section class="legal-section">
+          <h2>1. Who we are</h2>
+          <p>HuwamAi provides demand-protection services for businesses. For data protection purposes, HuwamAi is the controller of the personal data collected through this website unless this policy says otherwise.</p>
+          <div class="contact-box">
+            <p><strong>Contact email:</strong> info@huwamai.com</p>
+            <p><strong>Business address:</strong>11 Rillington Gardens, Milton Keynes, MK4 2EB</p>
+          </div>
+        </section>
+
+        <section class="legal-section">
+          <h2>2. What personal data we collect</h2>
+          <p>Depending on how you interact with us, we may collect:</p>
+          <ul>
+            <li>your name;</li>
+            <li>your email address;</li>
+            <li>your phone number;</li>
+            <li>your business name and role;</li>
+            <li>details you submit through enquiry forms or call-booking forms;</li>
+            <li>records of our communications with you, including emails and meeting notes;</li>
+            <li>basic technical data such as IP address, browser type, and page usage if analytics tools are enabled on the site.</li>
+          </ul>
+          <p>Please do not submit unnecessary sensitive personal data through this website. If later service delivery involves call recordings or health-related information, that should be covered by a more detailed client agreement and operational privacy notice.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>3. How we collect personal data</h2>
+          <p>We collect personal data when you:</p>
+          <ul>
+            <li>submit a form on this website;</li>
+            <li>book a discovery call;</li>
+            <li>contact us by email or phone;</li>
+            <li>interact with the website while analytics or cookies are active.</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>4. Why we use personal data</h2>
+          <p>We use personal data to:</p>
+          <ul>
+            <li>respond to enquiries;</li>
+            <li>schedule, confirm, and manage discovery calls;</li>
+            <li>assess whether our services are a fit for your business;</li>
+            <li>send follow-up information related to your enquiry;</li>
+            <li>operate, secure, and improve the website;</li>
+            <li>keep internal records of conversations and service interest.</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>5. Lawful bases for processing</h2>
+          <p>Under UK GDPR, organisations need a lawful basis for processing personal data. We generally rely on:</p>
+          <ul>
+            <li><strong>Legitimate interests</strong> for handling business enquiries, managing communications, and operating the website, where those interests are not overridden by your rights and interests.</li>
+            <li><strong>Consent</strong> where you have clearly opted in, or where consent is the appropriate basis for specific communications or technologies.</li>
+            <li><strong>Contract</strong> where processing is necessary to take steps at your request before entering into a contract or to deliver agreed services.</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>6. Who we share personal data with</h2>
+          <p>We do <strong>not sell</strong> personal data.</p>
+          <p>We may share personal data with trusted service providers where necessary to run the website or deliver our services, such as:</p>
+          <ul>
+            <li>website hosting providers;</li>
+            <li>email and communication platforms;
+			  <ul>
+			    <li>Google Plc</li>
+				<li>Instantly.ai</li>
+			  </ul>
+			</li>
+            <li>calendar or scheduling tools;
+			  <ul>
+			    <li>Calendaly</li>
+				<li>Cal.com</li>
+			  </ul>
+			</li>
+            <li>CRM or lead-management tools;</li>
+            <li>analytics providers;</li>
+            <li>telephony or voice infrastructure providers, if relevant.
+			  <ul>
+			    <li>VAPI</li>
+				<li>RatalAI</li>
+			  </ul>
+			</li>
+          </ul>
+          <p>These providers act on our instructions or under their own privacy obligations, depending on the context.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>7. International transfers</h2>
+          <p>Some suppliers may process data outside the UK. Where that happens, we will only use providers and transfer mechanisms that are intended to provide an appropriate level of protection under applicable data protection law.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>8. Data retention</h2>
+          <p>We keep personal data only for as long as reasonably necessary for the purpose it was collected, including to respond to enquiries, maintain business records, and meet legal, accounting, or regulatory requirements.</p>
+          <p>If you do not become a client, enquiry information is typically retained only for a limited period unless there is a legitimate reason to keep it longer. If you become a client, retention should be covered in your client agreement and operational documentation.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>9. Your rights</h2>
+          <p>Under UK GDPR, you may have rights including the right to:</p>
+          <ul>
+            <li>be informed about how your personal data is used;</li>
+            <li>request access to your personal data;</li>
+            <li>request correction of inaccurate personal data;</li>
+            <li>request deletion in certain circumstances;</li>
+            <li>request restriction of processing in certain circumstances;</li>
+            <li>object to certain types of processing;</li>
+            <li>request data portability where applicable.</li>
+          </ul>
+          <p>To exercise any of these rights, contact: <strong>info@huwamai.com</strong>.</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>10. Complaints</h2>
+          <p>If you have concerns about how your personal data is handled, please contact us first so we can try to resolve the issue.</p>
+          <p>You also have the right to complain to the Information Commissioner’s Office (ICO).</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>11. Security</h2>
+          <p>We take reasonable technical and organisational steps to protect personal data against unauthorised access, misuse, loss, or disclosure. No system is completely risk-free, so you should not send unnecessary sensitive information through general website forms.</p>
+        </section>
+
+		<section class="legal-section">
+			<h2>12. Cookies and analytics</h2>
+			
+			<p>This website uses cookies and similar technologies to understand how visitors use the site, improve performance, and measure the effectiveness of our marketing and communications.</p>
+			
+			<h3>What we use</h3>
+			<p>Where you provide consent, we use analytics tools such as Google Analytics to collect information about how visitors interact with the site. This may include:</p>
+			<ul>
+				<li>pages visited and time spent on the site;</li>
+				<li>interaction events such as video plays, button clicks, and booking activity;</li>
+				<li>device and browser information;</li>
+				<li>approximate location based on IP address;</li>
+				<li>traffic source information, including referral data and UTM parameters.</li>
+			</ul>
+			
+			<h3>How analytics is used</h3>
+			<p>This information helps us to:</p>
+			<ul>
+				<li>understand how visitors use the website;</li>
+				<li>identify which parts of the page are effective or need improvement;</li>
+				<li>measure engagement with content such as videos;</li>
+				<li>understand the effectiveness of outreach and campaigns;</li>
+				<li>improve the overall user experience and performance of the site.</li>
+			</ul>
+			
+			<h3>Consent</h3>
+			<p>Non-essential cookies and analytics technologies are only activated after you provide consent through the cookie banner. You can accept or reject analytics cookies when you first visit the site.</p>
+			
+			<p>You can also change your preferences at any time by using the “Cookie Settings” control available on the website.</p>
+			
+			<h3>Legal basis</h3>
+			<p>Where required under UK law, we rely on your consent to use non-essential cookies and analytics tools. Essential cookies necessary for the operation and security of the site may be used without consent.</p>
+			
+			<h3>Data sharing</h3>
+			<p>Analytics data may be processed by third-party providers such as Google. These providers may process data outside the UK. Where this occurs, we rely on appropriate safeguards intended to protect personal data.</p>
+			
+			<h3>Data retention</h3>
+			<p>Analytics data is retained only for as long as necessary to analyse website performance and user behaviour, after which it is deleted or anonymised in line with provider settings.</p>
+		</section>
+
+        <section class="legal-section">
+          <h2>13. Changes to this policy</h2>
+          <p>We may update this Privacy Policy from time to time. The latest version will always be posted on this page with the updated date shown at the top.</p>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 HuwamAi</div>
+        <div class="footer-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-use.html">Terms of Use</a>
+          <a href="index.html#book">Book a call</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
