@@ -95,6 +95,7 @@
 
       --h1: clamp(1.55rem, 3.2vw, 2.5rem);
       --h2: clamp(1.2rem, 2.2vw, 1.6rem);
+      --h1-h2: clamp(1.35rem, 2.7vw, 2rem);
       --h3: clamp(1.05rem, 1.6vw, 1.2rem);
       --p:  clamp(0.98rem, 1.2vw, 1.05rem);
 
@@ -335,11 +336,11 @@
 	  object-fit: cover;
 	}
 	
-    .vsl-caption{
+  .vsl-caption{
       color: var(--muted);
       font-size: 0.95rem;
       margin: 0;
-    }
+  }
 
 	.vsl-video{
 	  width: 100%;
@@ -451,6 +452,15 @@
       font-size: var(--h2);
       letter-spacing: -0.02em;
     }
+
+    .section-head--subtle h2 {
+      margin: 0 0 10px;
+      font-size: var(--h1-h2);
+      letter-spacing: -0.02em;
+      color: rgba(0, 0, 0, 0.7);
+      font-weight: 500;
+    }
+    
     .section-head p{
       margin: 0 auto;
       max-width: 82ch;
@@ -878,7 +888,7 @@
             </div>
 
             <!-- HERO FIX: observable truth + specificity, no unverifiable claims -->
-            <h1>When implant or Invisalign enquiries call after hours, they often book with whoever answers first.</h1>
+            <h1>When implant or Invisalign enquiries call and no one can answer, they don't wait, they go to whoever answers first</h1>
 
             <p class="subhead">
               A Demand Protection Layer that supports your reception team by handling high-value treatment enquiries when reception can’t answer.
@@ -954,24 +964,43 @@
   </div>
   -->
 
+  <!--section aria-label="The Reality"-->
+    <div class="container">
+      <div class="section-head section-head--subtle">
+        <h2>High-value treatment enquiries don't behave like routine calls</h2>
+      </div>
+    </div>
+  <!--/section-->
+
   <!-- ADDED: THE MOMENT (narrative education) -->
   <section id="moment" aria-label="The Moment">
     <div class="container">
       <div class="section-head">
-        <h2>The moment most practices never see</h2>
-        <p>A simple, common scenario that explains why “call back tomorrow” often isn’t enough for high-value enquiries.</p>
+        <h2>The moment most practices never notice</h2>
       </div>
 
       <div class="card">
         <div class="narrative">
           <p><strong>Tuesday evening.</strong></p>
-          <p>A patient searches: <strong>“Dental implants near me.”</strong></p>
-          <p>Your practice appears. They call.</p>
-          <p>Reception has gone home — or the front desk is already overloaded.</p>
-          <p>The call goes to voicemail.</p>
-          <p>So they try the next practice in the search results.</p>
-          <p>That practice answers. The consultation gets booked there.</p>
-          <p><strong>Not because they were better. Simply because they answered.</strong></p>
+          <p>A patient searches for <strong>implants</strong> or <strong>Invisalign</strong></p>
+          <p>They choose a practice</p>
+          <p>They call</p>
+          <p>The line is busy</p>
+          <p>Or no one can answer</p>
+          <p>It rings out</p>
+          <p>They don't leave a voicemail</p>
+          <p>They don't wait</p>
+          <p>They call the next practice</p>
+          <p>And that's where the booking happens</p>
+        </div>
+      </div>
+      <p/>
+      <div class="card">
+        <div class="narrative">
+          <p>This happens in minutes, not hours</p>
+          <p>By the time a missed call is returned, the patient has often already spoken to another practice</p>
+          <p>Not because they’re disloyal</p>
+          <p>But because they’re ready to act</p>
         </div>
       </div>
     </div>
@@ -981,17 +1010,26 @@
   <section aria-label="The Reality">
     <div class="container">
       <div class="section-head">
-        <h2>This is not about clinical quality. It’s about response speed.</h2>
-        <p>High-value treatment enquiries behave differently from routine calls.</p>
+        <h2>This isn't about clinical quality</h2>
+        <H2>Or reputation</H2>
       </div>
 
       <div class="card">
         <div class="narrative">
-          <p>When someone is considering implants, Invisalign or cosmetic work, they often contact <strong>multiple practices</strong> in the same sitting.</p>
-          <p>Some will submit forms. Some may book online. But many will <strong>call</strong> because they want to ask a quick question, confirm availability, or speak to someone before committing.</p>
-          <p>If that call reaches voicemail, most don’t wait — they try the next practice.</p>
+          <p>It's about who responds first</p>
+          <p>Because in that moment</p>
+          <p>the patient isn't comparing treatments</p>
+          <p>they're looking for someone who answers</p>
         </div>
       </div>
+      <p/>
+      <div class="card">
+        <div class="narrative">
+          <p>Most practices don’t realise this is happening</p>
+          <p>Because it leaves no trace</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
