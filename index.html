@@ -868,8 +868,8 @@
         </a>
 		
         <a class="btn" href="#book">
-		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
-		  <span class="btn-text-mobile">Book Your Discovery Call</span>
+		  <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+		  <span class="btn-text-mobile">Book Your Demand Protection Review</span>
 		</a>
       </div>
     </div>
@@ -904,8 +904,8 @@
           <div>
             <div class="hero-actions">
               <a class="btn" href="#book">
-			    <span class="btn-text-desktop">Schedule Your Discovery Call</span>
-			    <span class="btn-text-mobile">Book Your Discovery Call</span>
+			    <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+			    <span class="btn-text-mobile">Book Your Demand Protection Review</span>
 		      </a>
               <a class="btn secondary" href="#moment">See the moment</a>
             </div>
@@ -1239,49 +1239,83 @@
         </div>
       </div>
 
+      <p class="short-offer">
+        If your practice generates high-value enquiries, Demand Protection removes the vulnerability that depends on reception availability.
+      </p>
+
       <div class="cta-band">
         <a class="btn" href="#book">
-		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
-		  <span class="btn-text-mobile">Book Your Discovery Call</span>
-		</a>
-        <p class="short-offer">
-          If your practice generates high-value enquiries, Demand Protection removes the vulnerability that depends on reception availability.
-        </p>
+		      <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+		      <span class="btn-text-mobile">Book Your Demand Protection Review</span>
+		    </a>
       </div>
 
-      <div class="calendar-embed" id="book" aria-label="Schedule a discovery call">
+      <div class="calendar-embed" id="book" aria-label="Book A Demand Protection Review">
   
-	    <div class="calendar-intro">
-	      <p>
-	        <strong>Pick a time that works for you below.</strong><br>If no suitable slots are available, check back next week — new availability opens regularly. 
-	    	Apologies for any inconvenience!
-	      </p>
-	    </div>
-	    
-	    <div id="my-cal-inline-15min" class="cal-inline-widget"></div>
+        <div class="calendar-intro">
+          <p>
+            <strong>Pick a time that works for you below.</strong><br>If no suitable slots are available, check back next week — new availability opens regularly. 
+          Apologies for any inconvenience!
+          </p>
+        </div>
+        
+        <div id="my-cal-inline-15min" class="cal-inline-widget"></div>
 	  
-	  </div>
+	    </div>
 
-	  <!-- Cal inline embed code begins -->
-<script type="text/javascript">
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-Cal("init", "15min", {origin:"https://app.cal.com"});
+	    <!-- Cal inline embed code begins -->
+      <script type="text/javascript">
+      (function (C, A, L) { 
+        let p = function (a, ar) { 
+          a.q.push(ar); 
+        }; 
+        let d = C.document; 
+        C.Cal = C.Cal || function () { 
+          let cal = C.Cal; 
+          let ar = arguments; 
+          if (!cal.loaded) { 
+            cal.ns = {}; 
+            cal.q = cal.q || []; 
+            d.head.appendChild(d.createElement("script")).src = A; 
+            cal.loaded = true; 
+          } 
+          if (ar[0] === L) { 
+            const api = function () { 
+              p(api, arguments); 
+            }; 
+            const namespace = ar[1]; 
+            api.q = api.q || []; 
+            if(typeof namespace === "string"){
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } 
+            else { 
+              p(cal, ar);
+            } 
+            return;
+          } 
+          p(cal, ar); 
+        }; 
+      })
+      (window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "15min", {origin:"https://app.cal.com"});
 
-Cal.ns["15min"]("inline", {
-  elementOrSelector:"#my-cal-inline-15min",
-  config: {
-    layout:"column_view",
-    useSlotsViewOnSmallScreen:true
-  },
-  calLink: "huwamai/15min"
-});
+      Cal.ns["15min"]("inline", {
+        elementOrSelector:"#my-cal-inline-15min",
+        config: {
+          layout:"column_view",
+          useSlotsViewOnSmallScreen:true
+        },
+        calLink: "huwamai/15min"
+      });
 
-Cal.ns["15min"]("ui", {
-  hideEventTypeDetails:true,
-  layout:"column_view"
-});
-  </script>
-  <!-- Cal inline embed code ends -->
+      Cal.ns["15min"]("ui", {
+        hideEventTypeDetails:true,
+        layout:"column_view"
+      });
+      </script>
+      <!-- Cal inline embed code ends -->
     </div>
   </section>
 
@@ -1320,21 +1354,62 @@ Cal.ns["15min"]("ui", {
   </section>
   -->
 
+  <!-- OPERATIONAL REASSURANCE -->
+  <section aria-label="Final Call To Action">
+    <div class="container">
+      <div class="section-head">
+        <h2>What the 30-day pilot actually looks like</h2>
+      </div>
+
+      <div class="card">
+        <div class="narrative" style="margin:0;color:var(--muted);font-size:var(--p);">
+          <p>The pilot is designed to be controlled, low-risk, and practice-specific.</p>
+          <p>It does not replace your existing phone handling.</p>
+          <p>It sits around the moments your team cannot answer:
+            <ul>
+              <li>busy periods</li>
+              <li>overflow</li>
+              <li>after hours</li>
+            </ul>
+          </p>
+          <p>Before anything goes live:
+              <ul>
+                <li>call handling rules are agreed with the practice</li>
+                <li>escalation paths are defined</li>
+                <li>booking rules are approved</li>
+                <li>treatment boundaries are set </li>
+              </ul>
+          </p>
+          <p>The objective of the pilot is not to overhaul reception.</p>
+          <p>It is to give the practice visibility and control over treatment calls that would otherwise disappear during vulnerable moments.</p>
+          <p>At the end of the pilot, the practice can clearly evaluate:
+            <ul>
+              <li>what was captured</li>
+              <li>what would previously have been missed</li>
+              <li>whether the process improved responsiveness and visibility</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FINAL CTA + CALENDAR -->
   <section aria-label="Final Call To Action">
     <div class="container">
       <div class="section-head">
-        <h2>Schedule Your Discovery Call</h2>
-        <p>We’ll confirm fit, map where demand is currently vulnerable (busy periods / after hours), and outline the activation steps for your practice.</p>
+        <h2>Schedule Your Demand Protection Review</h2>
+        <p>We’ll look at how serious treatment calls are currently handled in your practice, identify where visibility may be breaking down during busy periods or after hours, and determine whether a controlled 30-day Demand Protection pilot would make sense for your setup.</p>
       </div>
 
       <div class="cta-band">
         <a class="btn" href="#book">
-		  <span class="btn-text-desktop">Schedule Your Discovery Call</span>
-		  <span class="btn-text-mobile">Book Your Discovery Call</span>
+		  <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+		  <span class="btn-text-mobile">Book Your Demand Protection Review</span>
 		</a>
         <p class="short-offer">
-          Worst case: you leave with a clear view of how demand protection would work in your practice.
+          The review is designed to determine whether Demand Protection is genuinely relevant for your practice, not to force a fit where one doesn’t exist.
         </p>
       </div>
 
