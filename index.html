@@ -6,99 +6,89 @@
   <title>Demand Protection for Private Dental Practices</title>
   <meta name="description" content="Protect high-value implant and Invisalign enquiries from booking elsewhere when reception is busy or the practice is closed." />
 
-<!--
-  Cookie consent approach for UK visitors:
-  - Analytics is OPTIONAL and is OFF by default.
-  - Google Analytics 4 loads only after the visitor explicitly accepts analytics cookies.
-  - The consent choice is stored locally so the banner does not reappear on every page load.
-  - This storage is used only to remember the visitor's privacy choice.
-  Replace G-XXXXXXXXXX with your real GA4 Measurement ID before publishing.
--->
-<script>
-  (function () {
-    const CONSENT_STORAGE_KEY = "huwamai_cookie_consent_v1";
-    const GA_MEASUREMENT_ID = "G-900BPMY9KK";
+  <!--
+    Cookie consent approach for UK visitors:
+    - Analytics is optional and off by default.
+    - Google Analytics 4 loads only after the visitor explicitly accepts analytics cookies.
+    - The consent choice is stored locally so the banner does not reappear on every page load.
+  -->
+  <script>
+    (function () {
+      const CONSENT_STORAGE_KEY = "huwamai_cookie_consent_v1";
+      const GA_MEASUREMENT_ID = "G-900BPMY9KK";
 
-    window.HuwamAiConsent = {
-      storageKey: CONSENT_STORAGE_KEY,
-      measurementId: GA_MEASUREMENT_ID,
-      analyticsEnabled: false,
-      gaLoaded: false,
-      getState: function () {
-        try { return localStorage.getItem(CONSENT_STORAGE_KEY); }
-        catch (e) { return null; }
-      },
-      setState: function (state) {
-        try { localStorage.setItem(CONSENT_STORAGE_KEY, state); }
-        catch (e) {}
-      },
-      loadGA: function () {
-        if (this.gaLoaded || !this.measurementId || this.measurementId === "G-XXXXXXXXXX") return;
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){ dataLayer.push(arguments); };
+      window.HuwamAiConsent = {
+        storageKey: CONSENT_STORAGE_KEY,
+        measurementId: GA_MEASUREMENT_ID,
+        analyticsEnabled: false,
+        gaLoaded: false,
+        getState: function () {
+          try { return localStorage.getItem(CONSENT_STORAGE_KEY); }
+          catch (e) { return null; }
+        },
+        setState: function (state) {
+          try { localStorage.setItem(CONSENT_STORAGE_KEY, state); }
+          catch (e) {}
+        },
+        loadGA: function () {
+          if (this.gaLoaded || !this.measurementId || this.measurementId === "G-XXXXXXXXXX") return;
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ dataLayer.push(arguments); };
 
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(this.measurementId);
-        document.head.appendChild(script);
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(this.measurementId);
+          document.head.appendChild(script);
 
-        window.gtag("js", new Date());
-        window.gtag("config", this.measurementId, {
-          /* send_page_view: false, */
-          anonymize_ip: true
-        });
+          window.gtag("js", new Date());
+          window.gtag("config", this.measurementId, {
+            anonymize_ip: true
+          });
 
-        this.gaLoaded = true;
-        this.analyticsEnabled = true;
-        window.__analyticsEnabled = true;
-      },
-      acceptAnalytics: function () {
-        this.setState("accepted");
-        this.loadGA();
-      },
-      rejectAnalytics: function () {
-        this.setState("rejected");
-        this.analyticsEnabled = false;
-        window.__analyticsEnabled = false;
+          this.gaLoaded = true;
+          this.analyticsEnabled = true;
+          window.__analyticsEnabled = true;
+        },
+        acceptAnalytics: function () {
+          this.setState("accepted");
+          this.loadGA();
+        },
+        rejectAnalytics: function () {
+          this.setState("rejected");
+          this.analyticsEnabled = false;
+          window.__analyticsEnabled = false;
+        }
+      };
+
+      window.__analyticsEnabled = false;
+
+      if (window.HuwamAiConsent.getState() === "accepted") {
+        window.HuwamAiConsent.loadGA();
       }
-    };
+    })();
+  </script>
 
-    window.__analyticsEnabled = false;
-
-    if (window.HuwamAiConsent.getState() === "accepted") {
-      window.HuwamAiConsent.loadGA();
-    }
-  })();
-</script>
-
-<style>
+  <style>
     :root{
       --bg: #F7F9FC;
       --surface: #FFFFFF;
       --text: #0B1220;
       --muted: #46536B;
       --line: rgba(11, 18, 32, 0.10);
-
       --primary: #1F6FEB;
       --primary-ink: #0D2A66;
-
-      /* Amazon-style CTA */
       --cta-bg: #FFD814;
       --cta-border: #FCD200;
       --cta-hover: #F7CA00;
       --cta-text: #111111;
-
       --shadow: 0 10px 30px rgba(11,18,32,0.08);
       --radius: 18px;
-
       --container: 1120px;
-
       --h1: clamp(1.55rem, 3.2vw, 2.5rem);
       --h2: clamp(1.2rem, 2.2vw, 1.6rem);
       --h1-h2: clamp(1.35rem, 2.7vw, 2rem);
       --h3: clamp(1.05rem, 1.6vw, 1.2rem);
       --p:  clamp(0.98rem, 1.2vw, 1.05rem);
-
       --space-1: clamp(8px, 1.2vw, 14px);
       --space-2: clamp(12px, 1.6vw, 18px);
       --space-3: clamp(16px, 2.2vw, 26px);
@@ -123,7 +113,6 @@
       margin: 0 auto;
     }
 
-    /* Top nav */
     .topbar{
       position: sticky;
       top: 0;
@@ -132,77 +121,65 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
+
     .topbar-inner{
       display:flex;
       align-items:center;
       justify-content: space-between;
       padding: 10px 0;
       gap: 12px;
-	  min-width: 0;
+      min-width: 0;
     }
-	
+
     .brand{
       display:flex;
       align-items:center;
       gap: 10px;
-	  min-width: 0;
+      min-width: 0;
       flex: 1 1 auto;
       text-decoration: none;
     }
+
     .brand-logo{
       display:block;
       height: clamp(24px, 8vw, 36px);
       width: auto;
       max-width: 100%;
       object-fit: contain;
-	  flex-shrink: 1;
-	  min-width: 0;
+      flex-shrink: 1;
+      min-width: 0;
     }
-    .brand-text{
-      display:flex;
-      flex-direction: column;
-      justify-content: center;
-	  min-width: 0;
+
+    .logo,
+    .brand-name,
+    .brand-sub {
+      display: none;
     }
-    .brand-sub{
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.2;
-	  white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-	
-	.logo,
-	.brand-name,
-	.brand-sub {
-	  display: none;
-	}
-	
-	/* CTA button */
+
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap: 8px;
-	  padding: 12px 16px;
-	  border-radius: 999px;
-	  border: 1px solid var(--cta-border);
-	  background: var(--cta-bg);
-	  color: var(--cta-text);
-	  font-weight: 800;
-	  font-size: 0.98rem;
-	  line-height: 1.1;
-	  text-decoration: none;
-	  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
-	  transition: transform 120ms ease, background 120ms ease;
-	  white-space: nowrap;
-	  flex-shrink: 0;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--cta-border);
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.1;
+      text-decoration: none;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+      transition: transform 120ms ease, background 120ms ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+      cursor: pointer;
     }
+
     .btn:hover{ background: var(--cta-hover); transform: translateY(-1px); }
-	.btn:active{ transform: translateY(0px); }
-	
+    .btn:active{ transform: translateY(0px); }
+
     .btn.secondary{
       background: transparent;
       border: 1px solid rgba(31,111,235,0.28);
@@ -210,17 +187,15 @@
       box-shadow: none;
       font-weight: 800;
     }
+
     .btn.secondary:hover{
       background: rgba(31,111,235,0.06);
       border-color: rgba(31,111,235,0.35);
       transform: none;
     }
-	
-	.btn-text-mobile{
-	  display: none;
-	}
 
-    /* HERO (Above the fold) */
+    .btn-text-mobile{ display: none; }
+
     .hero{
       min-height: auto;
       display:flex;
@@ -235,12 +210,18 @@
       align-items: start;
     }
 
-    .hero-card{
+    .hero-card,
+    .vsl,
+    .card,
+    .contrast-box{
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: var(--space-4);
       box-shadow: var(--shadow);
+    }
+
+    .hero-card{
+      padding: var(--space-4);
       display:flex;
       flex-direction: column;
       justify-content: space-between;
@@ -267,12 +248,14 @@
       margin: 0 0 var(--space-2);
       letter-spacing: -0.03em;
     }
+
     .subhead{
       font-size: clamp(1.02rem, 1.35vw, 1.15rem);
       color: var(--muted);
       margin: 0 0 var(--space-2);
       max-width: 62ch;
     }
+
     .support{
       font-size: var(--p);
       color: var(--text);
@@ -294,152 +277,100 @@
       font-size: 0.92rem;
     }
 
-    /* VSL placeholder */
     .vsl{
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
       padding: var(--space-3);
       display:flex;
       flex-direction: column;
       gap: var(--space-2);
       min-height: 0;
     }
+
     .vsl-title{
       font-weight: 900;
       letter-spacing: -0.02em;
     }
-	
-	.vsl-video{
-	  border-radius: 14px;
-	  overflow: hidden;
-	  border: 1px solid var(--line);
-	  box-shadow: var(--shadow);
-	  background: #000;
-	}
-	
-	.vsl-video-shell{
-	  position: relative;
-	  border-radius: 14px;
-	  overflow: hidden;
-	  border: 1px solid var(--line);
-	  background: #000;
-	  box-shadow: var(--shadow);
-	}
-	
-	.vsl-video video{
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  max-height: 360px;
-	  object-fit: cover;
-	}
-	
-  .vsl-caption{
+
+    .vsl-video-shell{
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      box-shadow: var(--shadow);
+    }
+
+    .vsl-video{
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 360px;
+      object-fit: cover;
+    }
+
+    .vsl-caption{
       color: var(--muted);
       font-size: 0.95rem;
       margin: 0;
-  }
-
-	.vsl-video{
-	  width: 100%;
-	  height: auto;
-	  display: block;
-	  max-height: 360px;
-	  object-fit: cover;
-	}
-	
-	.vsl-overlay{
-	  position: absolute;
-	  inset: 0;
-	  border: 0;
-	  padding: 0;
-	  margin: 0;
-	  width: 100%;
-	  height: 100%;
-	  background: none;
-	  cursor: pointer;
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  z-index: 2;
-	}
-	
-	.vsl-thumbnail{
-	  position: absolute;
-	  inset: 0;
-	  width: 100%;
-	  height: 100%;
-	  object-fit: cover;
-	  display: block;
-	}
-	
-	.vsl-overlay::after{
-	  content: "";
-	  position: absolute;
-	  inset: 0;
-	  background: linear-gradient(
-	  	180deg,
-	  	rgba(11,18,32,0.10),
-	  	rgba(11,18,32,0.35)
-	  );
-	}
-	
-	.vsl-overlay-inner{
-	  position: relative;
-	  z-index: 1;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  gap: 10px;
-	  color: #fff;
-	  text-align: center;
-	  padding: 20px;
-	}
-	
-	.vsl-play-icon{
-	  width: 64px;
-	  height: 64px;
-	  border-radius: 999px;
-	  display: grid;
-	  place-items: center;
-	  background: rgba(255,255,255,0.14);
-	  border: 1px solid rgba(255,255,255,0.28);
-	  backdrop-filter: blur(6px);
-	  font-size: 1.25rem;
-	  padding-left: 3px;
-	}
-	
-	.vsl-overlay-text{
-	  font-weight: 800;
-	  letter-spacing: -0.02em;
-	  font-size: 0.98rem;
-	}
-	
-	.vsl-video-shell.is-playing .vsl-overlay{
-	  display: none;
-	}
-
-    /* Logo strip */
-    .logo-strip{
-      padding: var(--space-3) 0 var(--space-4);
     }
-    .logo-strip-inner{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items:center;
+
+    .vsl-overlay{
+      position: absolute;
+      inset: 0;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      z-index: 2;
     }
-    .logo-pill{
-      background: rgba(255,255,255,0.75);
-      border: 1px solid var(--line);
+
+    .vsl-thumbnail{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vsl-overlay::after{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,18,32,0.10), rgba(11,18,32,0.35));
+    }
+
+    .vsl-overlay-inner{
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .vsl-play-icon{
+      width: 64px;
+      height: 64px;
       border-radius: 999px;
-      padding: 10px 14px;
-      color: var(--muted);
-      font-size: 0.92rem;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(6px);
+      font-size: 1.25rem;
+      padding-left: 3px;
     }
+
+    .vsl-video-shell.is-playing .vsl-overlay{ display: none; }
 
     section{ padding: var(--space-3) 0; }
 
@@ -447,6 +378,7 @@
       margin-bottom: var(--space-3);
       text-align: center;
     }
+
     .section-head h2{
       margin: 0 0 10px;
       font-size: var(--h2);
@@ -460,7 +392,7 @@
       color: rgba(0, 0, 0, 0.7);
       font-weight: 500;
     }
-    
+
     .section-head p{
       margin: 0 auto;
       max-width: 82ch;
@@ -469,11 +401,7 @@
     }
 
     .card{
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: var(--space-3);
-      box-shadow: var(--shadow);
       min-height: 0;
     }
 
@@ -499,6 +427,7 @@
       color: var(--text);
       font-size: var(--p);
     }
+
     .narrative p{ margin:0; color: var(--muted); }
     .narrative strong{ color: var(--text); }
 
@@ -510,14 +439,6 @@
       font-weight: 900;
       color: var(--primary-ink);
     }
-	/*
-    .dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--primary);
-    }
-	*/
 
     .bullets{
       margin: 10px 0 0;
@@ -525,40 +446,47 @@
       color: var(--muted);
       font-size: var(--p);
     }
+
     .bullets li{ margin: 6px 0; }
 
-    /* Objections */
-    .objection h3{
+    .objection h3,
+    .card h3{
       margin:0 0 10px;
       font-size: var(--h3);
       letter-spacing: -0.02em;
     }
-    .objection p{ margin:0; color: var(--muted); font-size: var(--p); }
 
-    /* Contrast section */
+    .objection p,
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: var(--p);
+    }
+
     .split{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-3);
       align-items: stretch;
     }
+
     .contrast-box{
-      border-radius: var(--radius);
       padding: var(--space-3);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.75);
       min-height: 0;
     }
+
     .contrast-box h3{
       margin: 0 0 10px;
       font-size: var(--h3);
       letter-spacing: -0.02em;
     }
+
     .contrast-flow{
       color: var(--muted);
       font-size: var(--p);
       line-height: 1.6;
     }
+
     .arrow{
       display:inline-block;
       padding: 0 6px;
@@ -566,11 +494,11 @@
       font-weight: 900;
     }
 
-    /* Calendar blocks */
     .cta-band{
       text-align:center;
       padding: var(--space-4) 0;
     }
+
     .short-offer{
       margin: 10px auto 0;
       max-width: 88ch;
@@ -578,87 +506,13 @@
       font-size: var(--p);
     }
 
-    .calendar{
-      margin-top: var(--space-3);
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      height: clamp(360px, 52vh, 560px);
-      display:grid;
-      place-items:center;
-      color: var(--muted);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-	
-	.calendar-embed{
-	  margin-top: var(--space-3);
-	  background: var(--surface);
-	  border: 1px solid var(--line);
-	  border-radius: var(--radius);
-	  box-shadow: var(--shadow);
-	  padding: var(--space-3);
-	  overflow: hidden;
-	  min-height: 760px;
-	}
-	
-	.calendar-intro{
-	  text-align: center;
-	  margin-bottom: var(--space-2);
-	  font-size: var(--p);
-	  color: var(--muted);
-	}
-
-	.calendar-intro strong{
-      color: var(--text);
-	}
-	
-	.cal-inline-widget{
-	  width: 100%;
-	  min-height: 760px;
-	  overflow: hidden;
-	}
-	
-	@media (max-width: 640px){
-	  .calendar-embed,
-	  .cal-inline-widget{
-	    min-height: 700px;
-	  }
-	}
-
-    /* Testimonials */
-    .testimonials{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-3);
-    }
-    .quote{
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .avatar{
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      background: rgba(11,18,32,0.05);
-      border: 1px solid var(--line);
-    }
-    .stars{
-      color: #C18F00;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-    }
-    .quote p{ margin: 0; color: var(--muted); font-size: var(--p); }
-    .quote strong{ color: var(--text); font-size: 0.98rem; }
-
     footer{
       border-top: 1px solid var(--line);
       padding: var(--space-4) 0;
       color: var(--muted);
       font-size: 0.95rem;
     }
+
     .footer-inner{
       display:flex;
       flex-wrap: wrap;
@@ -666,10 +520,154 @@
       align-items:center;
       justify-content: space-between;
     }
+
     .footer-links{
       display:flex;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+
+    .booking-modal{
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(11,18,32,0.62);
+    }
+
+    .booking-modal.is-open{
+      display: flex;
+    }
+
+    .booking-modal-panel{
+      width: min(980px, 100%);
+      max-height: min(92vh, 880px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 70px rgba(11,18,32,0.32);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .booking-modal-header{
+      position: relative;
+      padding: 18px 56px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .booking-modal-header p{
+      margin: 0;
+      color: var(--muted);
+      font-size: var(--p);
+      line-height: 1.45;
+    }
+
+    .booking-modal-header strong{
+      color: var(--text);
+    }
+
+    .booking-modal-close{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .booking-modal-close:hover{
+      background: rgba(11,18,32,0.04);
+    }
+
+    .booking-modal-calendar{
+      height: min(76vh, 720px);
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    .booking-modal-calendar .cal-inline-widget{
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    .cookie-banner{
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      background: rgba(11,18,32,0.96);
+      color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(11,18,32,0.28);
+      padding: 16px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .cookie-banner[hidden]{ display: none !important; }
+
+    .cookie-banner-inner{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cookie-banner p{
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .cookie-banner a{
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .cookie-banner-actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn.cookie-reject{
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: none;
+    }
+
+    .btn.cookie-reject:hover{
+      background: rgba(255,255,255,0.08);
+      transform: none;
+    }
+
+    .cookie-settings-link{
+      background: none;
+      border: 0;
+      padding: 0;
+      color: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
     }
 
     @media (max-width: 980px){
@@ -677,179 +675,93 @@
       .grid-3{ grid-template-columns: 1fr; }
       .grid-2{ grid-template-columns: 1fr; }
       .split{ grid-template-columns: 1fr; }
-      .testimonials{ grid-template-columns: 1fr; }
       .brand-sub{ display:none; }
+      .topbar-inner{ padding: 10px 0; }
+      .btn{ padding: 10px 14px; font-size: 0.92rem; }
     }
 
-	@media (max-width: 980px){
-      .brand-sub{
-        display: none;
+    @media (max-width: 640px){
+      .topbar-inner{ gap: 8px; }
+      .brand{ flex: 1 1 auto; min-width: 0; }
+      .brand-logo{ height: 28px; }
+      .btn{ padding: 9px 12px; font-size: 0.86rem; }
+      .cookie-banner{
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        padding: 14px;
       }
-    
-      .topbar-inner{
-        padding: 10px 0;
+      .cookie-banner .btn{ max-width: none; }
+      .cookie-banner-actions .btn{ width: auto; }
+
+      .booking-modal{
+        padding: 10px;
+        align-items: stretch;
       }
-    
-      .btn{
-        padding: 10px 14px;
+
+      .booking-modal-panel{
+        max-height: calc(100vh - 20px);
+        border-radius: 16px;
+      }
+
+      .booking-modal-header{
+        padding: 14px 48px 12px 16px;
+      }
+
+      .booking-modal-header p{
         font-size: 0.92rem;
       }
-    }
-    
-    @media (max-width: 640px){
-      .topbar-inner{
-        gap: 8px;
+
+      .booking-modal-calendar{
+        height: calc(100vh - 150px);
+        min-height: 560px;
       }
-    
-      .brand{
-        flex: 1 1 auto;
-        min-width: 0;
-      }
-    
-      .brand-logo{
-        height: 28px;
-      }
-    
-      .btn{
-        padding: 9px 12px;
-        font-size: 0.86rem;
+
+      .booking-modal-calendar .cal-inline-widget{
+        min-height: 560px;
       }
     }
-    
+
     @media (max-width: 420px){
-	  .hero-actions{
+      .hero-actions{
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
         gap: 10px;
       }
-      
+
       .hero-actions .btn{
         width: auto;
         flex: 0 1 auto;
       }
-      
+
       .topbar-inner{
         gap: 6px;
         padding: 8px 0;
       }
-      
-      .brand-logo{
-        height: 24px;
-      }
-      
+
+      .brand-logo{ height: 24px; }
+
       .btn{
         padding: 8px 10px;
         font-size: 0.78rem;
-        max-width: 170px;
+        max-width: 190px;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-	  
-	  .btn-text-desktop{
-	    display: none;
-	  }
-	  
-	  .btn-text-mobile{
-	    display: inline;
-	  }
+
+      .btn-text-desktop{ display: none; }
+      .btn-text-mobile{ display: inline; }
     }
-    
+
     @media (max-width: 360px){
-      .brand-logo{
-        height: 22px;
-      }
-    
+      .brand-logo{ height: 22px; }
       .btn{
         padding: 8px 9px;
         font-size: 0.74rem;
-        max-width: 155px;
+        max-width: 170px;
       }
     }
-
-.cookie-banner{
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 9999;
-  background: rgba(11,18,32,0.96);
-  color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(11,18,32,0.28);
-  padding: 16px;
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.cookie-banner[hidden]{
-  display: none !important;
-}
-
-.cookie-banner-inner{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.cookie-banner p{
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: rgba(255,255,255,0.92);
-}
-
-.cookie-banner a{
-  color: #fff;
-  text-decoration: underline;
-}
-
-.cookie-banner-actions{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-}
-
-.btn.cookie-reject{
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: none;
-}
-
-.btn.cookie-reject:hover{
-  background: rgba(255,255,255,0.08);
-  transform: none;
-}
-
-.cookie-settings-link{
-  background: none;
-  border: 0;
-  padding: 0;
-  color: inherit;
-  text-decoration: underline;
-  cursor: pointer;
-  font: inherit;
-}
-
-@media (max-width: 640px){
-  .cookie-banner{
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    padding: 14px;
-  }
-
-  .cookie-banner .btn{
-    max-width: none;
-  }
-
-  .cookie-banner-actions .btn{
-    width: auto;
-  }
-}
-
   </style>
 </head>
 
@@ -860,22 +772,16 @@
       <div class="topbar-inner">
         <a class="brand" href="/" aria-label="HuwamAi home">
           <img src="images/logo.png" alt="HuwamAi" class="brand-logo">
-          <!--
-		  <div class="brand-text">
-            <div class="brand-sub">Demand Protection for Private Dental Practices</div>
-          </div>
-		  -->
         </a>
-		
-        <a class="btn" href="#book">
-		  <span class="btn-text-desktop">Book Your Demand Protection Review</span>
-		  <span class="btn-text-mobile">Book Your Demand Protection Review</span>
-		</a>
+
+        <button type="button" class="btn js-cal-trigger" aria-haspopup="dialog" aria-controls="bookingModal">
+          <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+          <span class="btn-text-mobile">Book Your Review</span>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- HERO / ABOVE THE FOLD -->
   <header class="hero" role="banner">
     <div class="container">
       <div class="hero-grid">
@@ -887,7 +793,6 @@
               For UK private practices generating implant, aligner & cosmetic enquiries
             </div>
 
-            <!-- HERO FIX: observable truth + specificity, no unverifiable claims -->
             <h1>When serious treatment calls go unanswered, the relationship may never get the chance to start</h1>
 
             <p class="subhead">
@@ -895,18 +800,18 @@
             </p>
 
             <p class="support">
-              If your practice generates implant, Invisalign or cosmetic calls, the vulnerable moment is not your marketing.  
-              It is the moment a caller is ready enough to speak to someone, but the phone cannot be answered quickly.  
+              If your practice generates implant, Invisalign or cosmetic calls, the vulnerable moment is not your marketing.
+              It is the moment a caller is ready enough to speak to someone, but the phone cannot be answered quickly.
               <strong>Demand Protection makes sure that first call is not lost before trust has a chance to begin.</strong>
             </p>
           </div>
 
           <div>
             <div class="hero-actions">
-              <a class="btn" href="#book">
-			    <span class="btn-text-desktop">Book Your Demand Protection Review</span>
-			    <span class="btn-text-mobile">Book Your Demand Protection Review</span>
-		      </a>
+              <button type="button" class="btn js-cal-trigger" aria-haspopup="dialog" aria-controls="bookingModal">
+                <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+                <span class="btn-text-mobile">Book Your Review</span>
+              </button>
               <a class="btn secondary" href="#moment">See the moment</a>
             </div>
 
@@ -920,30 +825,30 @@
           </div>
         </div>
 
-        <aside class="vsl" aria-label="Video placeholder">
-		  <div class="vsl-title">Demand Protection in 2 mins</div>
-		  
-		  <div class="vsl-video-shell" id="vslShell">
-		    <button class="vsl-overlay" id="vslOverlay" type="button" aria-label="Play video">
-		    	<img src="images/vsl-thumbnail.jpg" alt="Demand Protection video thumbnail" class="vsl-thumbnail">
-		    	<span class="vsl-overlay-inner">
-		    	<span class="vsl-play-icon" aria-hidden="true">▶</span>
-		    	</span>
-		    </button>
-		    
-		    <video
-		    	id="vslVideo"
-		    	class="vsl-video"
-		    	controls
-		    	preload="metadata"
-		    	playsinline
-		    	poster="images/vsl-thumbnail.jpg"
-		    >
-		    	<source src="https://media.huwamai.com/videos/dps-web.mp4" type="video/mp4"/>
-		    	Your browser does not support the video tag.
-		    </video>
-		  </div>          
-		  <p class="vsl-caption" style="margin:0;">
+        <aside class="vsl" aria-label="Demand Protection video">
+          <div class="vsl-title">Demand Protection in 2 mins</div>
+
+          <div class="vsl-video-shell" id="vslShell">
+            <button class="vsl-overlay" id="vslOverlay" type="button" aria-label="Play video">
+              <img src="images/vsl-thumbnail.jpg" alt="Demand Protection video thumbnail" class="vsl-thumbnail">
+              <span class="vsl-overlay-inner">
+                <span class="vsl-play-icon" aria-hidden="true">▶</span>
+              </span>
+            </button>
+
+            <video
+              id="vslVideo"
+              class="vsl-video"
+              controls
+              preload="metadata"
+              playsinline
+              poster="images/vsl-thumbnail.jpg"
+            >
+              <source src="https://media.huwamai.com/videos/dps-web.mp4" type="video/mp4"/>
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p class="vsl-caption">
             The patient behaviour behind “who answers first” — and how practices remove the vulnerability without changing how reception works day-to-day.
           </p>
         </aside>
@@ -952,29 +857,12 @@
     </div>
   </header>
 
-  <!-- COMPANY LOGOS STRIP (optional placeholders) -->
-  <!--
-  <div class="logo-strip" aria-label="Credibility logo strip">
-    <div class="container">
-      <div class="logo-strip-inner">
-        <div class="logo-pill">Logo / Association (optional)</div>
-        <div class="logo-pill">Logo / Association (optional)</div>
-        <div class="logo-pill">Logo / Association (optional)</div>
-        <div class="logo-pill">Logo / Association (optional)</div>
-      </div>
+  <div class="container">
+    <div class="section-head section-head--subtle">
+      <h2>High-value treatment calls don't behave like routine calls</h2>
     </div>
   </div>
-  -->
 
-  <!--section aria-label="The Reality"-->
-    <div class="container">
-      <div class="section-head section-head--subtle">
-        <h2>High-value treatment calls don't behave like routine calls</h2>
-      </div>
-    </div>
-  <!--/section-->
-
-  <!-- ADDED: THE MOMENT (narrative education) -->
   <section id="moment" aria-label="The Moment">
     <div class="container">
       <div class="section-head">
@@ -985,35 +873,18 @@
         <div class="narrative">
           <p><strong>Tuesday evening.</strong></p>
           <p>A patient is thinking seriously about <strong>implants</strong> or <strong>Invisalign</strong></p>
-          <p>
-            They search.</br>
-            They read.</br>
-            They compare a few practices.</br>
-            They choose one to call.
-          </p>
-
+          <p>They search.<br>They read.<br>They compare a few practices.<br>They choose one to call.</p>
           <p>Your practice.</p>
-
-          <p>
-            But the line is busy.</br>
-            Or reception is helping another patient.</br>
-            Or the practice is closed.
-          </p>
-
+          <p>But the line is busy.<br>Or reception is helping another patient.<br>Or the practice is closed.</p>
           <p>The call rings out.</p>
-
-          <p>
-            They may not leave a voicemail.</br>
-            They may not wait for a callback.</br>
-            They may call another practice that answers and starts the conversation.
-          </p>
-
+          <p>They may not leave a voicemail.<br>They may not wait for a callback.<br>They may call another practice that answers and starts the conversation.</p>
           <p>Not because dentistry is transactional.</p>
-
           <p>Because before a patient has met you, trust has not been built yet.</p>
         </div>
       </div>
-      <p/>
+
+      <p></p>
+
       <div class="card">
         <div class="narrative">
           <p>This happens in minutes, not hours</p>
@@ -1025,7 +896,6 @@
     </div>
   </section>
 
-  <!-- ADDED: REALITY / BEHAVIOUR EXPLANATION -->
   <section aria-label="The Reality">
     <div class="container">
       <div class="section-head">
@@ -1035,30 +905,25 @@
       <div class="card">
         <div class="narrative">
           <p>This isn’t about clinical quality.</p>
-
           <p>It is not about suggesting patients are qualified to compare complex treatments.</p>
-
           <p>They are not.</p>
-
           <p>But before they have spoken to your practice, they are still deciding who to trust enough to take the next step with.</p>
-
           <p>That decision often starts with a simple question:</p>
-
           <p>did someone answer, understand the reason for the call, and guide them properly?</p>
         </div>
       </div>
-      <p/>
+
+      <p></p>
+
       <div class="card">
         <div class="narrative">
           <p>Most practices don’t realise this is happening</p>
           <p>Because it leaves no trace</p>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- THE TRANSFORMATION (3-step delivery system) -->
   <section id="how" aria-label="The Transformation">
     <div class="container">
       <div class="section-head">
@@ -1069,9 +934,7 @@
       <div class="grid-3">
         <div class="card">
           <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 1: Overflow & Out-of-Hours Activation</div>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">
-            A Demand Protection Layer is configured around your phone handling and booking structure, then activates automatically when reception cannot answer.
-          </p>
+          <p>A Demand Protection Layer is configured around your phone handling and booking structure, then activates automatically when reception cannot answer.</p>
           <ul class="bullets">
             <li>Line busy</li>
             <li>No answer after a set number of rings</li>
@@ -1081,10 +944,7 @@
 
         <div class="card">
           <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 2: Treatment Call Capture + Practice-Approved Next Step</div>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">
-            When the system activates, it answers the call, captures the caller’s details, understands what they are enquiring about, and follows your agreed handling rules.</br>
-            That may mean booking a suitable consultation, creating a callback task, flagging the call for a TCO, or sending the team a structured summary for follow-up.
-          </p>
+          <p>When the system activates, it answers the call, captures the caller’s details, understands what they are enquiring about, and follows your agreed handling rules.<br>That may mean booking a suitable consultation, creating a callback task, flagging the call for a TCO, or sending the team a structured summary for follow-up.</p>
           <ul class="bullets">
             <li>Captures caller details</li>
             <li>Identifies treatment interest</li>
@@ -1097,9 +957,7 @@
 
         <div class="card">
           <div class="step-num"><span class="dot" aria-hidden="true"></span> Step 3: Demand Visibility</div>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">
-            You receive visibility into treatment demand that previously disappeared during busy periods and after hours.
-          </p>
+          <p>You receive visibility into treatment demand that previously disappeared during busy periods and after hours.</p>
           <ul class="bullets">
             <li>Enquiries captured outside opening hours</li>
             <li>Enquiries captured during busy periods</li>
@@ -1110,7 +968,6 @@
     </div>
   </section>
 
-  <!-- THE BENEFITS -->
   <section aria-label="The Benefits">
     <div class="container">
       <div class="section-head">
@@ -1119,52 +976,49 @@
 
       <div class="grid-3">
         <div class="card">
-          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">After-hours enquiries are still handled</h3>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">High-value callers aren’t forced into voicemail, even in the evenings and weekends.</p>
+          <h3>After-hours enquiries are still handled</h3>
+          <p>High-value callers aren’t forced into voicemail, even in the evenings and weekends.</p>
         </div>
 
         <div class="card">
-          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">Busy-period gaps stop causing silent losses</h3>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">When reception is overloaded, enquiries are still captured rather than drifting to the next practice.</p>
+          <h3>Busy-period gaps stop causing silent losses</h3>
+          <p>When reception is overloaded, enquiries are still captured rather than drifting to the next practice.</p>
         </div>
 
         <div class="card">
-          <h3 style="margin:0 0 10px;font-size:var(--h3);letter-spacing:-0.02em;">The right next step can happen immediately</h3>
-          <p style="margin:0;color:var(--muted);font-size:var(--p);">Instead of relying on the caller to submit a form, wait, or ring back later.</p>
+          <h3>The right next step can happen immediately</h3>
+          <p>Instead of relying on the caller to submit a form, wait, or ring back later.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ADDED: WHAT IT DOESN'T DO -->
   <section aria-label="What Demand Protection Does Not Do">
-  <div class="container">
-    <div class="section-head">
-      <h2>What Demand Protection does not do</h2>
-      <p>Because high-value dentistry should never be handled like a simple transaction.</p>
+    <div class="container">
+      <div class="section-head">
+        <h2>What Demand Protection does not do</h2>
+        <p>Because high-value dentistry should never be handled like a simple transaction.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>It does not diagnose</h3>
+          <p>Clinical judgement stays with the practice. The system captures context, not clinical decisions.</p>
+        </div>
+
+        <div class="card">
+          <h3>It does not quote treatment</h3>
+          <p>It can follow your approved guidance, but it does not turn complex dentistry into price shopping.</p>
+        </div>
+
+        <div class="card">
+          <h3>It does not replace your team</h3>
+          <p>It activates only when the team cannot answer, then follows the next step according to your process.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="grid-3">
-      <div class="card">
-        <h3>It does not diagnose</h3>
-        <p>Clinical judgement stays with the practice. The system captures context, not clinical decisions.</p>
-      </div>
-
-      <div class="card">
-        <h3>It does not quote treatment</h3>
-        <p>It can follow your approved guidance, but it does not turn complex dentistry into price shopping.</p>
-      </div>
-
-      <div class="card">
-        <h3>It does not replace your team</h3>
-        <p>It activates only when the team cannot answer, then follows the next step according to your process.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <!-- ADDED: OBJECTION HANDLING -->
   <section aria-label="Common Questions">
     <div class="container">
       <div class="section-head">
@@ -1184,10 +1038,7 @@
 
         <div class="card objection">
           <h3>“Existing patients usually are loyal.”</h3>
-          <p>
-            This is for new private treatment callers who have not yet built trust with the practice.</br>
-            Until that first conversation happens, they are still deciding who to speak to, who feels responsive, and who they trust enough to take the next step with.
-          </p>
+          <p>This is for new private treatment callers who have not yet built trust with the practice.<br>Until that first conversation happens, they are still deciding who to speak to, who feels responsive, and who they trust enough to take the next step with.</p>
         </div>
 
         <div class="card objection">
@@ -1197,17 +1048,12 @@
 
         <div class="card objection">
           <h3>“Dentistry isn’t something patients should shop around for.”</h3>
-          <p>
-            Agreed. High-value dentistry is built on trust, clinical judgement and proper assessment.</br>
-            Demand Protection is not designed to help patients compare complex treatment like a commodity.</br>
-            It is designed to make sure that when a serious treatment call comes in, the practice captures enough context to start the right conversation instead of losing the call before the relationship begins.
-          </p>
+          <p>Agreed. High-value dentistry is built on trust, clinical judgement and proper assessment.<br>Demand Protection is not designed to help patients compare complex treatment like a commodity.<br>It is designed to make sure that when a serious treatment call comes in, the practice captures enough context to start the right conversation instead of losing the call before the relationship begins.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THE CONTRAST -->
   <section aria-label="The Contrast">
     <div class="container">
       <div class="section-head">
@@ -1219,7 +1065,7 @@
         <div class="contrast-box">
           <h3>Without Demand Protection</h3>
           <div class="contrast-flow">
-            Patient calls 
+            Patient calls
             <span class="arrow">→</span> no answer
             <span class="arrow">→</span> no context captured
             <span class="arrow">→</span> delayed callback
@@ -1230,7 +1076,7 @@
         <div class="contrast-box">
           <h3>With Demand Protection</h3>
           <div class="contrast-flow">
-            Patient calls 
+            Patient calls
             <span class="arrow">→</span> call answered
             <span class="arrow">→</span> context captured
             <span class="arrow">→</span> correct next step selected
@@ -1239,83 +1085,15 @@
         </div>
       </div>
 
-      <p class="short-offer">
-        If your practice generates high-value enquiries, Demand Protection removes the vulnerability that depends on reception availability.
-      </p>
-
       <div class="cta-band">
-        <a class="btn" href="#book">
-		      <span class="btn-text-desktop">Book Your Demand Protection Review</span>
-		      <span class="btn-text-mobile">Book Your Demand Protection Review</span>
-		    </a>
+        <p class="short-offer">
+          If your practice generates high-value enquiries, Demand Protection removes the vulnerability that depends on reception availability.
+        </p>
+        <button type="button" class="btn js-cal-trigger" aria-haspopup="dialog" aria-controls="bookingModal">
+          <span class="btn-text-desktop">Book Your Demand Protection Review Now</span>
+          <span class="btn-text-mobile">Book Your Review Now</span>
+        </button>
       </div>
-
-      <div class="calendar-embed" id="book" aria-label="Book A Demand Protection Review">
-  
-        <div class="calendar-intro">
-          <p>
-            <strong>Pick a time that works for you below.</strong><br>If no suitable slots are available, check back next week — new availability opens regularly. 
-          Apologies for any inconvenience!
-          </p>
-        </div>
-        
-        <div id="my-cal-inline-15min" class="cal-inline-widget"></div>
-	  
-	    </div>
-
-	    <!-- Cal inline embed code begins -->
-      <script type="text/javascript">
-      (function (C, A, L) { 
-        let p = function (a, ar) { 
-          a.q.push(ar); 
-        }; 
-        let d = C.document; 
-        C.Cal = C.Cal || function () { 
-          let cal = C.Cal; 
-          let ar = arguments; 
-          if (!cal.loaded) { 
-            cal.ns = {}; 
-            cal.q = cal.q || []; 
-            d.head.appendChild(d.createElement("script")).src = A; 
-            cal.loaded = true; 
-          } 
-          if (ar[0] === L) { 
-            const api = function () { 
-              p(api, arguments); 
-            }; 
-            const namespace = ar[1]; 
-            api.q = api.q || []; 
-            if(typeof namespace === "string"){
-              cal.ns[namespace] = cal.ns[namespace] || api;
-              p(cal.ns[namespace], ar);
-              p(cal, ["initNamespace", namespace]);
-            } 
-            else { 
-              p(cal, ar);
-            } 
-            return;
-          } 
-          p(cal, ar); 
-        }; 
-      })
-      (window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "15min", {origin:"https://app.cal.com"});
-
-      Cal.ns["15min"]("inline", {
-        elementOrSelector:"#my-cal-inline-15min",
-        config: {
-          layout:"column_view",
-          useSlotsViewOnSmallScreen:true
-        },
-        calLink: "huwamai/15min"
-      });
-
-      Cal.ns["15min"]("ui", {
-        hideEventTypeDetails:true,
-        layout:"column_view"
-      });
-      </script>
-      <!-- Cal inline embed code ends -->
     </div>
   </section>
 
@@ -1354,49 +1132,43 @@
   </section>
   -->
 
-  <!-- OPERATIONAL REASSURANCE -->
-  <section aria-label="Final Call To Action">
+  <section aria-label="The 30-day pilot">
     <div class="container">
       <div class="section-head">
         <h2>What the 30-day pilot actually looks like</h2>
       </div>
 
       <div class="card">
-        <div class="narrative" style="margin:0;color:var(--muted);font-size:var(--p);">
+        <div class="narrative">
           <p>The pilot is designed to be controlled, low-risk, and practice-specific.</p>
           <p>It does not replace your existing phone handling.</p>
-          <p>It sits around the moments your team cannot answer:
-            <ul>
-              <li>busy periods</li>
-              <li>overflow</li>
-              <li>after hours</li>
-            </ul>
-          </p>
-          <p>Before anything goes live:
-              <ul>
-                <li>call handling rules are agreed with the practice</li>
-                <li>escalation paths are defined</li>
-                <li>booking rules are approved</li>
-                <li>treatment boundaries are set </li>
-              </ul>
-          </p>
+          <p>It sits around the moments your team cannot answer:</p>
+          <ul class="bullets">
+            <li>busy periods</li>
+            <li>overflow</li>
+            <li>after hours</li>
+          </ul>
+          <p>Before anything goes live:</p>
+          <ul class="bullets">
+            <li>call handling rules are agreed with the practice</li>
+            <li>escalation paths are defined</li>
+            <li>booking rules are approved</li>
+            <li>treatment boundaries are set</li>
+          </ul>
           <p>The objective of the pilot is not to overhaul reception.</p>
           <p>It is to give the practice visibility and control over treatment calls that would otherwise disappear during vulnerable moments.</p>
-          <p>At the end of the pilot, the practice can clearly evaluate:
-            <ul>
-              <li>what was captured</li>
-              <li>what would previously have been missed</li>
-              <li>whether the process improved responsiveness and visibility</li>
-            </ul>
-          </p>
+          <p>At the end of the pilot, the practice can clearly evaluate:</p>
+          <ul class="bullets">
+            <li>what was captured</li>
+            <li>what would previously have been missed</li>
+            <li>whether the process improved responsiveness and visibility</li>
+          </ul>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- FINAL CTA + CALENDAR -->
-  <section aria-label="Final Call To Action">
+  <section id="book" aria-label="Final Call To Action">
     <div class="container">
       <div class="section-head">
         <h2>Schedule Your Demand Protection Review</h2>
@@ -1404,20 +1176,14 @@
       </div>
 
       <div class="cta-band">
-        <a class="btn" href="#book">
-		  <span class="btn-text-desktop">Book Your Demand Protection Review</span>
-		  <span class="btn-text-mobile">Book Your Demand Protection Review</span>
-		</a>
+        <button type="button" class="btn js-cal-trigger" aria-haspopup="dialog" aria-controls="bookingModal">
+          <span class="btn-text-desktop">Book Your Demand Protection Review</span>
+          <span class="btn-text-mobile">Book Your Review</span>
+        </button>
         <p class="short-offer">
           The review is designed to determine whether Demand Protection is genuinely relevant for your practice, not to force a fit where one doesn’t exist.
         </p>
       </div>
-
-      <!--
-	  <div class="calendar" aria-label="Second calendar placeholder">
-        CALENDAR (Second embed / repeated CTA)
-      </div>
-	  -->
     </div>
   </section>
 
@@ -1438,448 +1204,544 @@
     </div>
   </footer>
 
-
-<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie preferences" hidden>
-  <div class="cookie-banner-inner">
-    <p>
-      We use optional cookies to understand how visitors use this page, and improve performance.
-      These cookies only load if you choose <strong>Accept</strong>.
-      You can change your choice at any time using <strong>Cookie Settings</strong> in the footer.
-      See our <a href="privacy-policy.html">Privacy Policy</a> for details.
-    </p>
-    <div class="cookie-banner-actions">
-      <button type="button" class="btn" id="acceptAnalyticsBtn">Accept</button>
-      <button type="button" class="btn cookie-reject" id="rejectAnalyticsBtn">Reject</button>
+  <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" hidden>
+    <div class="booking-modal-panel">
+      <div class="booking-modal-header">
+        <button type="button" class="booking-modal-close" id="bookingModalClose" aria-label="Close booking popup">×</button>
+        <p id="bookingModalTitle">
+          <strong>Pick a time that works for you below.</strong><br>
+          If no suitable slots are available, check back next week — new availability opens regularly.
+          Apologies for any inconvenience!
+        </p>
+      </div>
+      <div class="booking-modal-calendar">
+        <div id="cal-modal-inline-15min" class="cal-inline-widget"></div>
+      </div>
     </div>
   </div>
-</div>
 
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie preferences" hidden>
+    <div class="cookie-banner-inner">
+      <p>
+        We use optional cookies to understand how visitors use this page, and improve performance.
+        These cookies only load if you choose <strong>Accept</strong>.
+        You can change your choice at any time using <strong>Cookie Settings</strong> in the footer.
+        See our <a href="privacy-policy.html">Privacy Policy</a> for details.
+      </p>
+      <div class="cookie-banner-actions">
+        <button type="button" class="btn" id="acceptAnalyticsBtn">Accept</button>
+        <button type="button" class="btn cookie-reject" id="rejectAnalyticsBtn">Reject</button>
+      </div>
+    </div>
+  </div>
 
-<script>
-(function () {
-  const STORAGE_KEY = "huwamai_session_id";
-  const VISITOR_STORAGE_KEY = "huwamai_first_seen_at";
-  const PAGE_ID = "demand_protection_lp";
-  const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
-  const CONSENT = window.HuwamAiConsent;
+  <!-- Cal.com popup embed code begins -->
+  <script type="text/javascript">
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if(typeof namespace === "string"){
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-  function getSessionId() {
-    let id = sessionStorage.getItem(STORAGE_KEY);
-    if (!id) {
-      id = "sess_" + Math.random().toString(36).slice(2) + "_" + Date.now();
-      sessionStorage.setItem(STORAGE_KEY, id);
-    }
-    return id;
-  }
+    Cal("init", "15min", {origin:"https://app.cal.com"});
 
-  function getVisitorStatus() {
-    try {
-      const existing = localStorage.getItem(VISITOR_STORAGE_KEY);
-      if (existing) {
-        return { type: "returning", firstSeenAt: existing };
-      }
-      const now = new Date().toISOString();
-      localStorage.setItem(VISITOR_STORAGE_KEY, now);
-      return { type: "new", firstSeenAt: now };
-    } catch (e) {
-      return { type: "unknown", firstSeenAt: "" };
-    }
-  }
-
-  const sessionId = getSessionId();
-  const visitorStatus = getVisitorStatus();
-  const params = new URLSearchParams(window.location.search);
-  const leadId = params.get("lead_id") || null;
-  const trackedScrollMilestones = new Set();
-  const trackedTimeMilestones = new Set();
-  const pageSeenSections = new Set();
-  let pageVisibleStart = Date.now();
-  let activeVisibleMs = 0;
-  let pageViewSent = false;
-  let calTrackingRegistered = false;
-
-  function getCommonParams(extraData) {
-    const utms = {};
-    UTM_KEYS.forEach(function (key) {
-      const value = params.get(key);
-      if (value) utms[key] = value;
+    Cal.ns["15min"]("ui", {
+      hideEventTypeDetails:true,
+      layout:"column_view"
     });
+  </script>
+  <!-- Cal.com popup embed code ends -->
 
-    return Object.assign({
-      page_id: PAGE_ID,
-      session_id: sessionId,
-      lead_id: leadId,
-      page_url: window.location.href,
-      page_path: window.location.pathname,
-      page_title: document.title,
-      referrer: document.referrer || "",
-      viewport_width: window.innerWidth,
-      viewport_height: window.innerHeight,
-      device_type: window.innerWidth <= 640 ? "mobile" : (window.innerWidth <= 980 ? "tablet" : "desktop"),
-      visitor_type: visitorStatus.type,
-      visitor_first_seen_at: visitorStatus.firstSeenAt
-    }, utms, extraData || {});
-  }
+  <script>
+    (function () {
+      const STORAGE_KEY = "huwamai_session_id";
+      const VISITOR_STORAGE_KEY = "huwamai_first_seen_at";
+      const PAGE_ID = "demand_protection_lp";
+      const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+      const CONSENT = window.HuwamAiConsent;
 
-  function trackEvent(eventName, extraData) {
-    const payload = getCommonParams(extraData);
-    console.log("Analytics event:", eventName, payload);
-    if (window.__analyticsEnabled && typeof window.gtag === "function") {
-      window.gtag("event", eventName, payload);
-    }
-  }
-
-  function sendPageViewOnce() {
-    if (pageViewSent || !window.__analyticsEnabled || typeof window.gtag !== "function") return;
-    pageViewSent = true;
-    window.gtag("event", "page_view", getCommonParams({
-      page_location: window.location.href,
-      page_referrer: document.referrer || ""
-    }));
-    trackEvent("lp_view");
-  }
-
-  function updateVisibleTime() {
-    if (!document.hidden) {
-      activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
-      pageVisibleStart = Date.now();
-    }
-  }
-
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-      activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
-    } else {
-      pageVisibleStart = Date.now();
-    }
-  });
-
-  [15, 30, 60, 120, 180].forEach(function (seconds) {
-    setTimeout(function () {
-      if (trackedTimeMilestones.has(seconds)) return;
-      trackedTimeMilestones.add(seconds);
-      trackEvent("lp_time_on_page", { seconds_on_page: seconds });
-    }, seconds * 1000);
-  });
-
-  window.addEventListener("scroll", function () {
-    const doc = document.documentElement;
-    const scrollTop = window.scrollY || doc.scrollTop || 0;
-    const scrollHeight = doc.scrollHeight - window.innerHeight;
-    if (scrollHeight <= 0) return;
-    const percent = Math.round((scrollTop / scrollHeight) * 100);
-
-    [25, 50, 75, 90].forEach(function (milestone) {
-      if (percent >= milestone && !trackedScrollMilestones.has(milestone)) {
-        trackedScrollMilestones.add(milestone);
-        trackEvent("lp_scroll_depth", { percent_scrolled: milestone });
+      function getSessionId() {
+        let id = sessionStorage.getItem(STORAGE_KEY);
+        if (!id) {
+          id = "sess_" + Math.random().toString(36).slice(2) + "_" + Date.now();
+          sessionStorage.setItem(STORAGE_KEY, id);
+        }
+        return id;
       }
-    });
-  }, { passive: true });
 
-  const sectionMap = [
-    ["hero", ".hero"],
-    ["moment", "#moment"],
-    ["transformation", "#how"],
-    ["contrast", 'section[aria-label="The Contrast"]'],
-    ["booking_widget", "#book"],
-    ["final_cta", 'section[aria-label="Final Call To Action"]']
-  ];
-
-  if ("IntersectionObserver" in window) {
-    const sectionObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const sectionName = entry.target.getAttribute("data-section-name");
-          if (sectionName && !pageSeenSections.has(sectionName)) {
-            pageSeenSections.add(sectionName);
-            trackEvent("lp_section_view", { section_name: sectionName });
+      function getVisitorStatus() {
+        try {
+          const existing = localStorage.getItem(VISITOR_STORAGE_KEY);
+          if (existing) {
+            return { type: "returning", firstSeenAt: existing };
           }
+          const now = new Date().toISOString();
+          localStorage.setItem(VISITOR_STORAGE_KEY, now);
+          return { type: "new", firstSeenAt: now };
+        } catch (e) {
+          return { type: "unknown", firstSeenAt: "" };
+        }
+      }
+
+      const sessionId = getSessionId();
+      const visitorStatus = getVisitorStatus();
+      const params = new URLSearchParams(window.location.search);
+      const leadId = params.get("lead_id") || null;
+      const trackedScrollMilestones = new Set();
+      const trackedTimeMilestones = new Set();
+      const pageSeenSections = new Set();
+      let pageVisibleStart = Date.now();
+      let activeVisibleMs = 0;
+      let calTrackingRegistered = false;
+
+      function getCommonParams(extraData) {
+        const utms = {};
+        UTM_KEYS.forEach(function (key) {
+          const value = params.get(key);
+          if (value) utms[key] = value;
+        });
+
+        return Object.assign({
+          page_id: PAGE_ID,
+          session_id: sessionId,
+          lead_id: leadId,
+          page_url: window.location.href,
+          page_path: window.location.pathname,
+          page_title: document.title,
+          referrer: document.referrer || "",
+          viewport_width: window.innerWidth,
+          viewport_height: window.innerHeight,
+          device_type: window.innerWidth <= 640 ? "mobile" : (window.innerWidth <= 980 ? "tablet" : "desktop"),
+          visitor_type: visitorStatus.type,
+          visitor_first_seen_at: visitorStatus.firstSeenAt
+        }, utms, extraData || {});
+      }
+
+      function trackEvent(eventName, extraData) {
+        const payload = getCommonParams(extraData);
+        console.log("Analytics event:", eventName, payload);
+        if (window.__analyticsEnabled && typeof window.gtag === "function") {
+          window.gtag("event", eventName, payload);
+        }
+      }
+
+      function updateVisibleTime() {
+        if (!document.hidden) {
+          activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
+          pageVisibleStart = Date.now();
+        }
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          activeVisibleMs += Math.max(0, Date.now() - pageVisibleStart);
+        } else {
+          pageVisibleStart = Date.now();
         }
       });
-    }, { threshold: 0.35 });
 
-    sectionMap.forEach(function (item) {
-      const sectionName = item[0];
-      const el = document.querySelector(item[1]);
-      if (el) {
-        el.setAttribute("data-section-name", sectionName);
-        sectionObserver.observe(el);
-      }
-    });
-  }
-
-  document.querySelectorAll("a.btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      const label = (btn.textContent || "").trim().replace(/\s+/g, " ");
-      const href = btn.getAttribute("href") || "";
-      const parentSection = btn.closest("header, section, .topbar");
-      let placement = "unknown";
-
-      if (parentSection) {
-        if (parentSection.classList.contains("topbar")) placement = "topbar";
-        else if (parentSection.classList.contains("hero")) placement = "hero";
-        else placement = parentSection.getAttribute("aria-label") || parentSection.id || parentSection.className || "section";
-      }
-
-      trackEvent("lp_cta_click", {
-        cta_label: label,
-        cta_href: href,
-        cta_placement: placement
+      [15, 30, 60, 120, 180].forEach(function (seconds) {
+        setTimeout(function () {
+          if (trackedTimeMilestones.has(seconds)) return;
+          trackedTimeMilestones.add(seconds);
+          trackEvent("lp_time_on_page", { seconds_on_page: seconds });
+        }, seconds * 1000);
       });
-    });
-  });
 
-  document.querySelectorAll('a[href]').forEach(function (link) {
-    link.addEventListener("click", function () {
-      const rawHref = link.getAttribute("href") || "";
-      if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("mailto:") || rawHref.startsWith("tel:")) return;
+      window.addEventListener("scroll", function () {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop || 0;
+        const scrollHeight = doc.scrollHeight - window.innerHeight;
+        if (scrollHeight <= 0) return;
+        const percent = Math.round((scrollTop / scrollHeight) * 100);
 
-      let url;
-      try {
-        url = new URL(rawHref, window.location.href);
-      } catch (e) {
-        return;
-      }
+        [25, 50, 75, 90].forEach(function (milestone) {
+          if (percent >= milestone && !trackedScrollMilestones.has(milestone)) {
+            trackedScrollMilestones.add(milestone);
+            trackEvent("lp_scroll_depth", { percent_scrolled: milestone });
+          }
+        });
+      }, { passive: true });
 
-      if (url.origin !== window.location.origin) {
-        trackEvent("outbound_link_click", {
-          outbound_url: url.href,
-          outbound_domain: url.hostname,
-          link_text: (link.textContent || "").trim().replace(/\s+/g, " ")
+      const sectionMap = [
+        ["hero", ".hero"],
+        ["moment", "#moment"],
+        ["transformation", "#how"],
+        ["contrast", 'section[aria-label="The Contrast"]'],
+        ["pilot", 'section[aria-label="The 30-day pilot"]'],
+        ["final_cta", "#book"]
+      ];
+
+      if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              const sectionName = entry.target.getAttribute("data-section-name");
+              if (sectionName && !pageSeenSections.has(sectionName)) {
+                pageSeenSections.add(sectionName);
+                trackEvent("lp_section_view", { section_name: sectionName });
+              }
+            }
+          });
+        }, { threshold: 0.35 });
+
+        sectionMap.forEach(function (item) {
+          const sectionName = item[0];
+          const el = document.querySelector(item[1]);
+          if (el) {
+            el.setAttribute("data-section-name", sectionName);
+            sectionObserver.observe(el);
+          }
         });
       }
-    });
-  });
 
-  const video = document.getElementById("vslVideo");
-  const overlay = document.getElementById("vslOverlay");
-  const shell = document.getElementById("vslShell");
+      document.querySelectorAll(".topbar .btn, header .btn, section .btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const label = (btn.textContent || "").trim().replace(/\s+/g, " ");
+          const href = btn.getAttribute("href") || btn.getAttribute("data-cal-link") || "";
+          const parentSection = btn.closest("header, section, .topbar");
+          let placement = "unknown";
 
-  if (video && overlay && shell) {
-    let watchedSeconds = 0;
-    let lastTimestamp = 0;
-    let isPlaying = false;
-    const quartilesTracked = new Set();
+          if (parentSection) {
+            if (parentSection.classList.contains("topbar")) placement = "topbar";
+            else if (parentSection.classList.contains("hero")) placement = "hero";
+            else placement = parentSection.getAttribute("aria-label") || parentSection.id || parentSection.className || "section";
+          }
 
-    function trackVideoEvent(eventName, extraData) {
-      trackEvent(eventName, Object.assign({
-        video_id: "dps_vsl",
-        video_current_time: Number(video.currentTime || 0).toFixed(2),
-        video_duration: Number(video.duration || 0).toFixed(2),
-        watched_seconds: Number(watchedSeconds).toFixed(2)
-      }, extraData || {}));
-    }
-
-    function startPlayback() {
-      video.play().then(function () {
-        shell.classList.add("is-playing");
-      }).catch(function (err) {
-        console.warn("Video play was blocked:", err);
+          trackEvent("lp_cta_click", {
+            cta_label: label,
+            cta_href: href,
+            cta_placement: placement,
+            cta_action: btn.classList.contains("js-cal-trigger") ? "cal_popup" : "anchor"
+          });
+        });
       });
-    }
 
-    overlay.addEventListener("click", function () {
-      trackVideoEvent("vsl_overlay_click");
-      startPlayback();
-    });
+      document.querySelectorAll('a[href]').forEach(function (link) {
+        link.addEventListener("click", function () {
+          const rawHref = link.getAttribute("href") || "";
+          if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("mailto:") || rawHref.startsWith("tel:")) return;
 
-    video.addEventListener("play", function () {
-      isPlaying = true;
-      lastTimestamp = Date.now();
-      shell.classList.add("is-playing");
-      trackVideoEvent("vsl_play");
-    });
+          let url;
+          try {
+            url = new URL(rawHref, window.location.href);
+          } catch (e) {
+            return;
+          }
 
-    video.addEventListener("pause", function () {
-      if (isPlaying) {
-        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+          if (url.origin !== window.location.origin && !link.classList.contains("js-cal-trigger")) {
+            trackEvent("outbound_link_click", {
+              outbound_url: url.href,
+              outbound_domain: url.hostname,
+              link_text: (link.textContent || "").trim().replace(/\s+/g, " ")
+            });
+          }
+        });
+      });
+
+      const video = document.getElementById("vslVideo");
+      const overlay = document.getElementById("vslOverlay");
+      const shell = document.getElementById("vslShell");
+
+      if (video && overlay && shell) {
+        let watchedSeconds = 0;
+        let lastTimestamp = 0;
+        let isPlaying = false;
+        const quartilesTracked = new Set();
+
+        function trackVideoEvent(eventName, extraData) {
+          trackEvent(eventName, Object.assign({
+            video_id: "dps_vsl",
+            video_current_time: Number(video.currentTime || 0).toFixed(2),
+            video_duration: Number(video.duration || 0).toFixed(2),
+            watched_seconds: Number(watchedSeconds).toFixed(2)
+          }, extraData || {}));
+        }
+
+        function startPlayback() {
+          video.play().then(function () {
+            shell.classList.add("is-playing");
+          }).catch(function (err) {
+            console.warn("Video play was blocked:", err);
+          });
+        }
+
+        overlay.addEventListener("click", function () {
+          trackVideoEvent("vsl_overlay_click");
+          startPlayback();
+        });
+
+        video.addEventListener("play", function () {
+          isPlaying = true;
+          lastTimestamp = Date.now();
+          shell.classList.add("is-playing");
+          trackVideoEvent("vsl_play");
+        });
+
+        video.addEventListener("pause", function () {
+          if (isPlaying) {
+            watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+          }
+          isPlaying = false;
+          trackVideoEvent("vsl_pause");
+        });
+
+        video.addEventListener("ended", function () {
+          if (isPlaying) {
+            watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+          }
+          isPlaying = false;
+          quartilesTracked.add(100);
+          trackVideoEvent("vsl_complete", { percent_watched: 100 });
+        });
+
+        video.addEventListener("timeupdate", function () {
+          if (!video.duration || !isFinite(video.duration)) return;
+          const percent = (video.currentTime / video.duration) * 100;
+
+          [25, 50, 75, 100].forEach(function (milestone) {
+            if (percent >= milestone && !quartilesTracked.has(milestone)) {
+              quartilesTracked.add(milestone);
+              trackVideoEvent("vsl_progress", { percent_watched: milestone });
+            }
+          });
+        });
       }
-      isPlaying = false;
-      trackVideoEvent("vsl_pause");
-    });
 
-    video.addEventListener("ended", function () {
-      if (isPlaying) {
-        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
+      function registerCalTracking() {
+        if (calTrackingRegistered) return true;
+        try {
+          if (!window.Cal || !window.Cal.ns || !window.Cal.ns["15min"]) return false;
+
+          const calNs = window.Cal.ns["15min"];
+
+          calNs("on", {
+            action: "linkReady",
+            callback: function () {
+              trackEvent("booking_popup_ready");
+            }
+          });
+
+          calNs("on", {
+            action: "linkFailed",
+            callback: function (e) {
+              const data = (e && e.detail && e.detail.data) || {};
+              trackEvent("booking_popup_failed", {
+                error_code: data.code || "",
+                error_message: data.msg || ""
+              });
+            }
+          });
+
+          calNs("on", {
+            action: "eventTypeSelected",
+            callback: function (e) {
+              const data = (e && e.detail && e.detail.data) || {};
+              trackEvent("booking_event_type_selected", {
+                event_type_title: data.eventType && data.eventType.title ? data.eventType.title : ""
+              });
+            }
+          });
+
+          calNs("on", {
+            action: "bookingSuccessfulV2",
+            callback: function (e) {
+              const data = (e && e.detail && e.detail.data) || {};
+              trackEvent("booking_complete", {
+                booking_uid: data.uid || "",
+                booking_title: data.title || "",
+                booking_status: data.status || "",
+                booking_start_time: data.startTime || "",
+                booking_end_time: data.endTime || "",
+                booking_event_type_id: data.eventTypeId || "",
+                payment_required: data.paymentRequired ? "true" : "false",
+                is_recurring: data.isRecurring ? "true" : "false"
+              });
+            }
+          });
+
+          calTrackingRegistered = true;
+          return true;
+        } catch (err) {
+          console.warn("Cal tracking registration failed:", err);
+          return false;
+        }
       }
-      isPlaying = false;
-      quartilesTracked.add(100);
-      trackVideoEvent("vsl_complete", { percent_watched: 100 });
-    });
 
-    video.addEventListener("timeupdate", function () {
-      if (!video.duration || !isFinite(video.duration)) return;
-      const percent = (video.currentTime / video.duration) * 100;
-
-      [25, 50, 75, 100].forEach(function (milestone) {
-        if (percent >= milestone && !quartilesTracked.has(milestone)) {
-          quartilesTracked.add(milestone);
-          trackVideoEvent("vsl_progress", { percent_watched: milestone });
+      let calRegistrationAttempts = 0;
+      const calInterval = setInterval(function () {
+        calRegistrationAttempts += 1;
+        if (registerCalTracking() || calRegistrationAttempts > 40) {
+          clearInterval(calInterval);
         }
-      });
-    });
+      }, 500);
 
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden && isPlaying) {
-        watchedSeconds += Math.max(0, (Date.now() - lastTimestamp) / 1000);
-        lastTimestamp = Date.now();
-      } else if (!document.hidden && isPlaying) {
-        lastTimestamp = Date.now();
+      const bookingModal = document.getElementById("bookingModal");
+      const bookingModalClose = document.getElementById("bookingModalClose");
+      const bookingModalCalendar = document.getElementById("cal-modal-inline-15min");
+      let bookingWidgetLoaded = false;
+      let lastFocusedElement = null;
+
+      function loadBookingWidget() {
+        if (bookingWidgetLoaded) return true;
+
+        if (!window.Cal || !window.Cal.ns || !window.Cal.ns["15min"] || !bookingModalCalendar) {
+          return false;
+        }
+
+        window.Cal.ns["15min"]("inline", {
+          elementOrSelector:"#cal-modal-inline-15min",
+          config: {
+            layout:"column_view",
+            useSlotsViewOnSmallScreen:true
+          },
+          calLink: "huwamai/15min"
+        });
+
+        bookingWidgetLoaded = true;
+        return true;
       }
-    });
-  }
 
-  function registerCalTracking() {
-    if (calTrackingRegistered) return true;
-    try {
-      if (!window.Cal || !window.Cal.ns || !window.Cal.ns["15min"]) return false;
+      function openBookingModal(trigger) {
+        lastFocusedElement = trigger || document.activeElement;
 
-      const calNs = window.Cal.ns["15min"];
+        if (bookingModal) {
+          bookingModal.hidden = false;
+          bookingModal.classList.add("is-open");
+          document.body.style.overflow = "hidden";
+          if (bookingModalClose) bookingModalClose.focus();
+        }
 
-      calNs("on", {
-        action: "linkReady",
-        callback: function () {
-          trackEvent("booking_widget_ready");
+        trackEvent("booking_popup_open_click", {
+          cal_link: "huwamai/15min",
+          cal_namespace: "15min"
+        });
+
+        if (loadBookingWidget()) return;
+
+        let attempts = 0;
+        const retry = setInterval(function () {
+          attempts += 1;
+          if (loadBookingWidget() || attempts >= 30) {
+            clearInterval(retry);
+          }
+        }, 150);
+      }
+
+      function closeBookingModal() {
+        if (!bookingModal) return;
+
+        bookingModal.classList.remove("is-open");
+        bookingModal.hidden = true;
+        document.body.style.overflow = "";
+
+        trackEvent("booking_popup_close", {
+          cal_link: "huwamai/15min",
+          cal_namespace: "15min"
+        });
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
+      }
+
+      document.querySelectorAll(".js-cal-trigger").forEach(function (trigger) {
+        trigger.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          openBookingModal(trigger);
+        });
+      });
+
+      if (bookingModalClose) {
+        bookingModalClose.addEventListener("click", closeBookingModal);
+      }
+
+      if (bookingModal) {
+        bookingModal.addEventListener("click", function (event) {
+          if (event.target === bookingModal) {
+            closeBookingModal();
+          }
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && bookingModal && bookingModal.classList.contains("is-open")) {
+          closeBookingModal();
         }
       });
 
-      calNs("on", {
-        action: "linkFailed",
-        callback: function (e) {
-          const data = (e && e.detail && e.detail.data) || {};
-          trackEvent("booking_widget_failed", {
-            error_code: data.code || "",
-            error_message: data.msg || ""
-          });
-        }
+      function showCookieBanner(forceOpen) {
+        const banner = document.getElementById("cookieBanner");
+        if (!banner) return;
+        const state = CONSENT && CONSENT.getState ? CONSENT.getState() : null;
+        banner.hidden = !(forceOpen || !state);
+      }
+
+      function hideCookieBanner() {
+        const banner = document.getElementById("cookieBanner");
+        if (banner) banner.hidden = true;
+      }
+
+      const acceptBtn = document.getElementById("acceptAnalyticsBtn");
+      const rejectBtn = document.getElementById("rejectAnalyticsBtn");
+      const settingsBtn = document.getElementById("cookieSettingsBtn");
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener("click", function () {
+          if (CONSENT) CONSENT.acceptAnalytics();
+          hideCookieBanner();
+          trackEvent("cookie_consent_updated", { analytics_choice: "accepted" });
+        });
+      }
+
+      if (rejectBtn) {
+        rejectBtn.addEventListener("click", function () {
+          if (CONSENT) CONSENT.rejectAnalytics();
+          hideCookieBanner();
+          console.log("Analytics consent rejected. Optional analytics remains disabled.");
+        });
+      }
+
+      if (settingsBtn) {
+        settingsBtn.addEventListener("click", function () {
+          showCookieBanner(true);
+        });
+      }
+
+      showCookieBanner(false);
+
+      window.addEventListener("pagehide", function () {
+        updateVisibleTime();
+        trackEvent("lp_exit", {
+          seconds_visible: Math.round(activeVisibleMs / 1000),
+          sections_seen: Array.from(pageSeenSections).join(","),
+          scroll_milestones_reached: Array.from(trackedScrollMilestones).sort(function (a, b) { return a - b; }).join(",")
+        });
       });
-
-      calNs("on", {
-        action: "eventTypeSelected",
-        callback: function (e) {
-          const data = (e && e.detail && e.detail.data) || {};
-          trackEvent("booking_event_type_selected", {
-            event_type_title: data.eventType && data.eventType.title ? data.eventType.title : ""
-          });
-        }
-      });
-
-      calNs("on", {
-        action: "bookingSuccessfulV2",
-        callback: function (e) {
-          const data = (e && e.detail && e.detail.data) || {};
-          trackEvent("booking_complete", {
-            booking_uid: data.uid || "",
-            booking_title: data.title || "",
-            booking_status: data.status || "",
-            booking_start_time: data.startTime || "",
-            booking_end_time: data.endTime || "",
-            booking_event_type_id: data.eventTypeId || "",
-            payment_required: data.paymentRequired ? "true" : "false",
-            is_recurring: data.isRecurring ? "true" : "false"
-          });
-        }
-      });
-
-      calNs("on", {
-        action: "rescheduleBookingSuccessfulV2",
-        callback: function (e) {
-          const data = (e && e.detail && e.detail.data) || {};
-          trackEvent("booking_rescheduled", {
-            booking_uid: data.uid || "",
-            booking_title: data.title || "",
-            booking_status: data.status || "",
-            booking_start_time: data.startTime || "",
-            booking_end_time: data.endTime || ""
-          });
-        }
-      });
-
-      calNs("on", {
-        action: "bookingCancelled",
-        callback: function (e) {
-          const data = (e && e.detail && e.detail.data) || {};
-          const booking = data.booking || {};
-          trackEvent("booking_cancelled", {
-            booking_uid: booking.uid || "",
-            cancellation_reason: booking.cancellationReason || ""
-          });
-        }
-      });
-
-      calTrackingRegistered = true;
-      return true;
-    } catch (err) {
-      console.warn("Cal tracking registration failed:", err);
-      return false;
-    }
-  }
-
-  let calRegistrationAttempts = 0;
-  const calInterval = setInterval(function () {
-    calRegistrationAttempts += 1;
-    if (registerCalTracking() || calRegistrationAttempts > 40) {
-      clearInterval(calInterval);
-    }
-  }, 500);
-
-  function showCookieBanner(forceOpen) {
-    const banner = document.getElementById("cookieBanner");
-    if (!banner) return;
-    const state = CONSENT && CONSENT.getState ? CONSENT.getState() : null;
-    banner.hidden = !(forceOpen || !state);
-  }
-
-  function hideCookieBanner() {
-    const banner = document.getElementById("cookieBanner");
-    if (banner) banner.hidden = true;
-  }
-
-  const acceptBtn = document.getElementById("acceptAnalyticsBtn");
-  const rejectBtn = document.getElementById("rejectAnalyticsBtn");
-  const settingsBtn = document.getElementById("cookieSettingsBtn");
-
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", function () {
-      if (CONSENT) CONSENT.acceptAnalytics();
-      hideCookieBanner();
-      trackEvent("cookie_consent_updated", { analytics_choice: "accepted" });
-      /* sendPageViewOnce(); */
-    });
-  }
-
-  if (rejectBtn) {
-    rejectBtn.addEventListener("click", function () {
-      if (CONSENT) CONSENT.rejectAnalytics();
-      hideCookieBanner();
-      console.log("Analytics consent rejected. Optional analytics remains disabled.");
-    });
-  }
-
-  if (settingsBtn) {
-    settingsBtn.addEventListener("click", function () {
-      showCookieBanner(true);
-    });
-  }
-
-  showCookieBanner(false);
-
-  if (window.__analyticsEnabled) {
-    /* sendPageViewOnce(); */
-  }
-
-  window.addEventListener("pagehide", function () {
-    updateVisibleTime();
-    trackEvent("lp_exit", {
-      seconds_visible: Math.round(activeVisibleMs / 1000),
-      sections_seen: Array.from(pageSeenSections).join(","),
-      scroll_milestones_reached: Array.from(trackedScrollMilestones).sort(function (a, b) { return a - b; }).join(",")
-    });
-  });
-})();
-</script>
-
+    })();
+  </script>
 
 </body>
 </html>
