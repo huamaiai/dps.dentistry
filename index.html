@@ -882,8 +882,8 @@
               Your browser does not support the video tag.
             </video>
           </div>
-          <p class="vsl-caption">
-            The patient behaviour behind “who answers first” — and how practices remove the vulnerability without changing how reception works day-to-day.
+          <p class="vsl-caption" id="vslSupportText" data-vsl-message-variant="">
+            The vulnerability is not clinical quality. It is what happens in the minutes before a relationship begins.
           </p>
         </aside>
 
@@ -893,7 +893,7 @@
 
   <div class="container">
     <div class="section-head section-head--subtle">
-      <h2>High-value treatment calls don't behave like routine calls</h2>
+      <h2>High-value treatment callers don't behave like routine callers</h2>
     </div>
   </div>
 
@@ -1226,7 +1226,7 @@
       <div class="footer-inner">
         <div style="display:flex;align-items:center;gap:10px;">
           <div class="logo" style="width:34px;height:34px;border-radius:12px;">H</div>
-          <div>© 2026 HuwamAi</div>
+          <div>© 2026 Huwamai</div>
         </div>
 
         <div class="footer-links">
@@ -1342,6 +1342,43 @@
       const visitorStatus = getVisitorStatus();
       const params = new URLSearchParams(window.location.search);
       const leadId = params.get("lead_id") || null;
+
+      const VSL_MESSAGE_STORAGE_KEY = "huwamai_vsl_message_variant_v1";
+      const VSL_MESSAGE_VARIANTS = [
+        {
+          id: "relationship_minutes",
+          text: "The vulnerability is not clinical quality. It is what happens in the minutes before a relationship begins."
+        },
+        {
+          id: "commercial_first_response",
+          text: "High-value treatment patients often choose the practice that responds first, before loyalty, trust, or preference ever has the chance to form."
+        },
+        {
+          id: "hidden_first_conversation",
+          text: "Most practices focus on patient experience after contact is made. Very few see what happens when the first conversation never happens at all."
+        }
+      ];
+
+      function getVslMessageVariant() {
+        let variantId = null;
+
+        try {
+          variantId = sessionStorage.getItem(VSL_MESSAGE_STORAGE_KEY);
+        } catch (e) {}
+
+        if (!VSL_MESSAGE_VARIANTS.some(function (variant) { return variant.id === variantId; })) {
+          const selected = VSL_MESSAGE_VARIANTS[Math.floor(Math.random() * VSL_MESSAGE_VARIANTS.length)];
+          variantId = selected.id;
+
+          try {
+            sessionStorage.setItem(VSL_MESSAGE_STORAGE_KEY, variantId);
+          } catch (e) {}
+        }
+
+        return VSL_MESSAGE_VARIANTS.find(function (variant) { return variant.id === variantId; }) || VSL_MESSAGE_VARIANTS[0];
+      }
+
+      const activeVslMessageVariant = getVslMessageVariant();
       const trackedScrollMilestones = new Set();
       const trackedTimeMilestones = new Set();
       const pageSeenSections = new Set();
@@ -1368,7 +1405,9 @@
           viewport_height: window.innerHeight,
           device_type: window.innerWidth <= 640 ? "mobile" : (window.innerWidth <= 980 ? "tablet" : "desktop"),
           visitor_type: visitorStatus.type,
-          visitor_first_seen_at: visitorStatus.firstSeenAt
+          visitor_first_seen_at: visitorStatus.firstSeenAt,
+          vsl_message_variant: activeVslMessageVariant.id,
+          vsl_message_text: activeVslMessageVariant.text
         }, utms, extraData || {});
       }
 
@@ -1379,6 +1418,21 @@
           window.gtag("event", eventName, payload);
         }
       }
+
+      function renderVslSupportMessage() {
+        const supportText = document.getElementById("vslSupportText");
+        if (!supportText) return;
+
+        supportText.textContent = activeVslMessageVariant.text;
+        supportText.setAttribute("data-vsl-message-variant", activeVslMessageVariant.id);
+      }
+
+      renderVslSupportMessage();
+
+      trackEvent("vsl_message_variant_view", {
+        variant_id: activeVslMessageVariant.id,
+        variant_text: activeVslMessageVariant.text
+      });
 
       function updateVisibleTime() {
         if (!document.hidden) {
